@@ -53,6 +53,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\S_groundTile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
