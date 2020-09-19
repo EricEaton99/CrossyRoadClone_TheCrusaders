@@ -47,5 +47,7 @@ MonoBehaviour:
   tile_bush: {fileID: 2690098474350116466, guid: e72c1966ecf4ac646a168281de881ee8, type: 3}
   tile_road: {fileID: 9008816352817966931, guid: 0e6ac39763ae7a74d9a443fd4fdc017f, type: 3}
   tile_water: {fileID: 8900246078353098708, guid: 89cd970ef4ea1004689b62ca7ac3d5c2, type: 3}
+  tile_path: {fileID: 5029424292821038654, guid: d5f4e53291a8fcd4baacd04e99a371a0, type: 3}
+  tile_goal: {fileID: 5029424292821038654, guid: 01ae62127219e8342967185c2de3f81d, type: 3}
   log: {fileID: 2690098474350116466, guid: e72c1966ecf4ac646a168281de881ee8, type: 3}
   car: {fileID: 8866214213125023123, guid: f04600c5f9aa1854f8a589b76b3cc4ef, type: 3}
