@@ -49,5 +49,9 @@ public class GameManager : MonoBehaviour
     {
         helpPanel.SetActive(false);
     }
+    public void OnClickQuit()
+    {
+        Application.Quit();
+    }
 }
 
