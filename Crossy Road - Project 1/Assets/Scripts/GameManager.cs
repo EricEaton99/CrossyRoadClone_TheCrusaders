@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -7,6 +9,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject groundTile1;
     [SerializeField] GameObject groundTile2;
     GameObject frontTile;
+
+    [Header("Main Menu")]
+    public GameObject helpPanel;
+    
 
 
     private void Start()
@@ -28,6 +34,20 @@ public class GameManager : MonoBehaviour
         {
             frontTile = groundTile1;
         }
+    }
+
+    //Main Menu stuff
+    public void OnClickStart()
+    {
+        SceneManager.LoadScene("Main Game");
+    }
+    public void OnClickHelp()
+    {
+        helpPanel.SetActive(true);
+    }
+    public void OnHelpClose()
+    {
+        helpPanel.SetActive(false);
     }
 }
 
