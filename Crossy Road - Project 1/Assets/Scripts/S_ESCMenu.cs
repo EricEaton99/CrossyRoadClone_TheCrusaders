@@ -33,4 +33,9 @@ public class S_ESCMenu : MonoBehaviour
         eMenu.SetActive(false);
     }
 
+    public void OnQuitClick()
+    {
+        Application.Quit();
+    }
+
 }

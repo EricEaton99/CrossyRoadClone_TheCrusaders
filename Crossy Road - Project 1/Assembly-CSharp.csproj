@@ -55,6 +55,7 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\S_groundTile.cs" />
     <Compile Include="Assets\Scripts\S_ESCMenu.cs" />
+    <Compile Include="Assets\Scripts\S_ScoreTracker.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
