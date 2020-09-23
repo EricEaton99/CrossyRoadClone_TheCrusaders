@@ -52,12 +52,16 @@
     <UnityVersion>2020.1.2f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\S_ScoreTracker.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\S_groundTile.cs" />
     <Compile Include="Assets\Scripts\S_ESCMenu.cs" />
-    <Compile Include="Assets\Scripts\S_ScoreTracker.cs" />
   </ItemGroup>
   <ItemGroup>
+     <None Include="Assets\SimplePixelUI\fonts\Font2\license.txt" />
+     <None Include="Assets\SimplePixelUI\fonts\Font1\license.txt" />
+     <None Include="Assets\SimplePixelUI\fonts\Font1\readme.txt" />
+     <None Include="Assets\SimplePixelUI\fonts\Font2\readme.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.1.2f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
