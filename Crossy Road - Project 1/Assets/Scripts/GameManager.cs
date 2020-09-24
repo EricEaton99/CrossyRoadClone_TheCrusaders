@@ -40,18 +40,22 @@ public class GameManager : MonoBehaviour
     public void OnClickStart()
     {
         SceneManager.LoadScene("Main Game");
+        print("The Start button was clicked");
     }
     public void OnClickHelp()
     {
         helpPanel.SetActive(true);
+        print("The Help button was clicked");
     }
     public void OnHelpClose()
     {
         helpPanel.SetActive(false);
+        print("The Help (close) button was clicked");
     }
     public void OnClickQuit()
     {
         Application.Quit();
+        print("The Quit button was clicked");
     }
 }
 
