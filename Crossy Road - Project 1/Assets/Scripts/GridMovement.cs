@@ -1,17 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GridMovement : MonoBehaviour
 {
+    [Header("Scoring Stuff")]
+    public int score = 0;
+    public int highScore = 0;
+    public Text currentScore;
+    public Text currentHighScore;
+    [Header("Moving Stuff")]
     bool isMoving;
     public GameObject targetPos;
+   
 
 
     private void Start()
     {
         isMoving = false;
+        highScore = PlayerPrefs.GetInt("Highscore");
     }
 
     void Update()
@@ -51,6 +60,8 @@ public class GridMovement : MonoBehaviour
                 transform.position = Vector3.Lerp(transform.position, new Vector3(targetPos.transform.position.x, 1.5f, targetPos.transform.position.z), .3f);
             }
         }
+
+        ScoreUpdate();
     }
 
     void TurnAndMove(int direction)
@@ -64,12 +75,14 @@ public class GridMovement : MonoBehaviour
                 break;
             case 1:
                 transform.rotation = Quaternion.AngleAxis(90, Vector3.up); //face right
+                score++;
                 break;
             case 2:
                 transform.rotation = Quaternion.AngleAxis(180, Vector3.up); //face backwards
                 break;
             case 3:
                 transform.rotation = Quaternion.AngleAxis(-90, Vector3.up); //face left
+                score--;
                 break;
 
         }
@@ -148,5 +161,20 @@ public class GridMovement : MonoBehaviour
                 targetPos.transform.position.y, Mathf.Round(targetPos.transform.position.z));
             //NEEDS WORK-- When going from water to land, estimate landing location
         }
+    }
+
+    private void ScoreUpdate()
+    {
+        currentScore.text = "Score: " + score.ToString();
+        currentHighScore.text = "Highscore: " + highScore.ToString();
+        //Scoring stuff, tracking the score and highscore.
+        if (score >= highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt("Highscore", highScore);
+            PlayerPrefs.Save();
+        }
+
+        
     }
 }

@@ -12,12 +12,14 @@ public class GameManager : MonoBehaviour
 
     [Header("Main Menu")]
     public GameObject helpPanel;
+    public Text highscore;
     
 
 
     private void Start()
     {
         frontTile = groundTile1;
+        highscore.text = PlayerPrefs.GetInt("Highscore").ToString();
     }
 
     public void OnFlipButtonClick()
