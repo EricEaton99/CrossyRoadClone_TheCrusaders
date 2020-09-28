@@ -4,25 +4,40 @@ using UnityEngine;
 
 public class S_groundTile : MonoBehaviour
 {
-    public GameObject tile_grass;
-    public GameObject tile_bush;
-    public GameObject tile_road;
-    public GameObject tile_water;
+    public GameObject[] tilesetSummer = new GameObject[4];
+    public GameObject[] tilesetFall = new GameObject[4];
+    public GameObject[] tilesetWinter = new GameObject[4];
     public GameObject tile_path;
     public GameObject tile_goal;
 
     [SerializeField] GameObject log;
     [SerializeField] GameObject car;
 
+    GameObject[,] seasonTileset = new GameObject[3, 4];
     GameObject[,] tileGrid = new GameObject[10, 10];
     List<GameObject> objBacklog = new List<GameObject>();
     int path = 5;
 
     private void Start()
     {
+        for (int j = 0; j < 4; j++)
+        {
+            //print("tilesetSummer[j].name = " + tilesetSummer[j].name);
+            seasonTileset[0, j] = tilesetSummer[j];
+        }
+        for (int j = 0; j < 4; j++)
+        {
+            //print("tilesetFall[j].name = " + tilesetFall[j].name);
+            seasonTileset[1, j] = tilesetFall[j];
+        }
+        for (int j = 0; j < 4; j++)
+        {
+            //print("tilesetWinter[j].name = " + tilesetWinter[j].name);
+            seasonTileset[2, j] = tilesetWinter[j];
+        }
+
+
         Shuffle();
-
-
     }
 
     public void ClearArray()
@@ -46,6 +61,8 @@ public class S_groundTile : MonoBehaviour
         Instantiate(tile_path, new Vector3(transform.position.x, 0, -1), Quaternion.identity);
         Debug.LogError("NewTile");
         int goal = 5;
+        int season = Random.Range(0, 3);
+        print("Season = " + season);
         for (int i = 0; i < 10; i++)
         {
             Debug.Log("path is " + path);
@@ -100,11 +117,13 @@ public class S_groundTile : MonoBehaviour
                         }
                         else if (Random.Range(0, 2) == 0)
                         {
-                            tileGrid[i, j] = Instantiate(tile_grass, new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
+                            //print("seasonTileset[season, 0].name = " + seasonTileset[season, 0].name);
+                            tileGrid[i, j] = Instantiate(seasonTileset[season, 0], new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
                         }
                         else
                         {
-                            tileGrid[i, j] = Instantiate(tile_bush, new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
+                            //print("seasonTileset[season, 1].name = " + seasonTileset[season, 1].name);
+                            tileGrid[i, j] = Instantiate(seasonTileset[season, 1], new Vector3(i + transform.position.x, 0, j), Quaternion.Euler(0 ,Random.Range(0, 3) * 90, 0));
                         }
                     }
                     break;
@@ -112,7 +131,7 @@ public class S_groundTile : MonoBehaviour
                     for (int j = 0; j < 10; j++)
                     {
                         //Debug.Log(i + ", " + j);
-                        tileGrid[i, j] = Instantiate(tile_water, new Vector3(i + transform.position.x, -0.05f, j), Quaternion.identity);
+                        tileGrid[i, j] = Instantiate(seasonTileset[season, 2], new Vector3(i + transform.position.x, -0.05f, j), Quaternion.identity);
                     }
                     if (Random.Range(0, 2) == 0)
                     {
@@ -129,7 +148,7 @@ public class S_groundTile : MonoBehaviour
                     for (int j = 0; j < 10; j++)
                     {
                         //Debug.Log(i + ", " + j);
-                        tileGrid[i, j] = Instantiate(tile_road, new Vector3(i + transform.position.x, -0.025f, j), Quaternion.identity);
+                        tileGrid[i, j] = Instantiate(seasonTileset[season, 3], new Vector3(i + transform.position.x, -0.025f, j), Quaternion.identity);
                     }
 
                     if (Random.Range(0, 2) == 0)

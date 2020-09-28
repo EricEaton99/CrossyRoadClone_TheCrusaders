@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SubtractiveShadowColor: {r: 0.6519669, g: 0.710417, b: 0.8584906, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.022803597, g: 0.013358738, b: 0.0038931614, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 2fd43547357f9cf4d89cc6ab2bde491e, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -284,6 +284,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de05ffeb8178f4246a668b98e66ebfaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tilesetSummer:
+  - {fileID: 5029424292821038654, guid: 1afac1251ea5d6b4eaf5077824525638, type: 3}
+  - {fileID: 5029424292821038654, guid: dc710ce13f714b742ad88e73652d005d, type: 3}
+  - {fileID: 8900246078353098708, guid: 89cd970ef4ea1004689b62ca7ac3d5c2, type: 3}
+  - {fileID: 9008816352817966931, guid: 0e6ac39763ae7a74d9a443fd4fdc017f, type: 3}
+  tilesetFall:
+  - {fileID: 5029424292821038654, guid: a25cf980ed6b501459f100200866a6a1, type: 3}
+  - {fileID: 5029424292821038654, guid: e2b7232de60ec0140926adbbf7a36581, type: 3}
+  - {fileID: 8900246078353098708, guid: 89cd970ef4ea1004689b62ca7ac3d5c2, type: 3}
+  - {fileID: 9008816352817966931, guid: 0e6ac39763ae7a74d9a443fd4fdc017f, type: 3}
+  tilesetWinter:
+  - {fileID: 5029424292821038654, guid: cf238ec0cea40454ca8ee15aadd60eed, type: 3}
+  - {fileID: 5029424292821038654, guid: ffde6bfc57137f945afe42a69817f8b6, type: 3}
+  - {fileID: 8900246078353098708, guid: 89cd970ef4ea1004689b62ca7ac3d5c2, type: 3}
+  - {fileID: 9008816352817966931, guid: 0e6ac39763ae7a74d9a443fd4fdc017f, type: 3}
   tile_grass: {fileID: 5029424292821038654, guid: 1afac1251ea5d6b4eaf5077824525638, type: 3}
   tile_bush: {fileID: 5029424292821038654, guid: dc710ce13f714b742ad88e73652d005d, type: 3}
   tile_road: {fileID: 9008816352817966931, guid: 0e6ac39763ae7a74d9a443fd4fdc017f, type: 3}
@@ -301,6 +316,72 @@ Transform:
   m_GameObject: {fileID: 508469562}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &547571514
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 547571516}
+  - component: {fileID: 547571515}
+  m_Layer: 0
+  m_Name: groundTile1.1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &547571515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547571514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de05ffeb8178f4246a668b98e66ebfaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilesetSummer:
+  - {fileID: 5029424292821038654, guid: 1afac1251ea5d6b4eaf5077824525638, type: 3}
+  - {fileID: 5029424292821038654, guid: dc710ce13f714b742ad88e73652d005d, type: 3}
+  - {fileID: 8900246078353098708, guid: 89cd970ef4ea1004689b62ca7ac3d5c2, type: 3}
+  - {fileID: 9008816352817966931, guid: 0e6ac39763ae7a74d9a443fd4fdc017f, type: 3}
+  tilesetFall:
+  - {fileID: 5029424292821038654, guid: a25cf980ed6b501459f100200866a6a1, type: 3}
+  - {fileID: 5029424292821038654, guid: e2b7232de60ec0140926adbbf7a36581, type: 3}
+  - {fileID: 8900246078353098708, guid: 89cd970ef4ea1004689b62ca7ac3d5c2, type: 3}
+  - {fileID: 9008816352817966931, guid: 0e6ac39763ae7a74d9a443fd4fdc017f, type: 3}
+  tilesetWinter:
+  - {fileID: 5029424292821038654, guid: cf238ec0cea40454ca8ee15aadd60eed, type: 3}
+  - {fileID: 5029424292821038654, guid: ffde6bfc57137f945afe42a69817f8b6, type: 3}
+  - {fileID: 8900246078353098708, guid: 89cd970ef4ea1004689b62ca7ac3d5c2, type: 3}
+  - {fileID: 9008816352817966931, guid: 0e6ac39763ae7a74d9a443fd4fdc017f, type: 3}
+  tile_grass: {fileID: 5029424292821038654, guid: 1afac1251ea5d6b4eaf5077824525638, type: 3}
+  tile_bush: {fileID: 5029424292821038654, guid: dc710ce13f714b742ad88e73652d005d, type: 3}
+  tile_road: {fileID: 9008816352817966931, guid: 0e6ac39763ae7a74d9a443fd4fdc017f, type: 3}
+  tile_water: {fileID: 8900246078353098708, guid: 89cd970ef4ea1004689b62ca7ac3d5c2, type: 3}
+  tile_path: {fileID: 5029424292821038654, guid: d5f4e53291a8fcd4baacd04e99a371a0, type: 3}
+  tile_goal: {fileID: 5029424292821038654, guid: 01ae62127219e8342967185c2de3f81d, type: 3}
+  log: {fileID: 2690098474350116466, guid: e72c1966ecf4ac646a168281de881ee8, type: 3}
+  car: {fileID: 8866214213125023123, guid: f04600c5f9aa1854f8a589b76b3cc4ef, type: 3}
+--- !u!4 &547571516
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547571514}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -400,7 +481,7 @@ RectTransform:
   - {fileID: 1559237981}
   - {fileID: 1321832945}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -472,7 +553,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &872657050
 MonoBehaviour:
@@ -487,7 +568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundTile1: {fileID: 508469562}
-  groundTile2: {fileID: 2000498401}
+  groundTile2: {fileID: 547571514}
   helpPanel: {fileID: 0}
 --- !u!1 &915321477
 GameObject:
@@ -735,7 +816,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -785,13 +866,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017825808}
-  m_LocalRotation: {x: -0.8977252, y: -0.12263132, z: -0.4051494, w: 0.1220859}
+  m_LocalRotation: {x: -0.8091617, y: 0.02516239, z: -0.4658753, w: -0.35718963}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 198.576, y: -47.376007, z: 352.651}
+  m_LocalEulerAnglesHint: {x: 143.023, y: -67.10901, z: 338.55402}
 --- !u!1 &1097468108
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,7 +917,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1302023051
 GameObject:
@@ -1029,7 +1110,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1521967948
 MonoBehaviour:
@@ -1165,7 +1246,7 @@ Transform:
   m_Children:
   - {fileID: 1302023054}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1726910106
 GameObject:
@@ -1196,7 +1277,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1287,7 +1368,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1973018817
 GameObject:
@@ -1397,7 +1478,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.75, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2000498401
 GameObject:
@@ -1415,7 +1496,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2000498402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1428,6 +1509,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de05ffeb8178f4246a668b98e66ebfaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tilesetSummer:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  tilesetFall:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  tilesetWinter:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   tile_grass: {fileID: 5029424292821038654, guid: 1afac1251ea5d6b4eaf5077824525638, type: 3}
   tile_bush: {fileID: 5029424292821038654, guid: dc710ce13f714b742ad88e73652d005d, type: 3}
   tile_road: {fileID: 9008816352817966931, guid: 0e6ac39763ae7a74d9a443fd4fdc017f, type: 3}
