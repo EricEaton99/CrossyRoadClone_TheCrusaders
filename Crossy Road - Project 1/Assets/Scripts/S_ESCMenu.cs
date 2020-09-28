@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class S_ESCMenu : MonoBehaviour
@@ -27,12 +28,19 @@ public class S_ESCMenu : MonoBehaviour
     public void OnEPress()
     {
         eMenu.SetActive(true);
-
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
     public void OnEQuit()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         eMenu.SetActive(false);
+    }
 
+    public void OnClickMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void OnQuitClick()
