@@ -1,10 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GridMovement : MonoBehaviour
 {
+    [Header("Scoring Stuff")]
+    public int score = 0;
+    public int highScore = 0;
+    public Text currentScore;
+    [Header("Moving Stuff")]
     bool isMoving;
     public GameObject targetPos;
 
@@ -12,12 +18,18 @@ public class GridMovement : MonoBehaviour
 
     private void Start()
     {
+        //setting up highscore prefs
+        PlayerPrefs.SetInt("Highscore", highScore);
+
         ridingLog = false;
         isMoving = false;
     }
 
     void Update()
     {
+        //Scoring stuff (updating the score script)
+        currentScore.text = "Score: " + score.ToString();
+
         if (!isMoving)
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -71,14 +83,16 @@ public class GridMovement : MonoBehaviour
                 break;
             case 1:
                 transform.rotation = Quaternion.AngleAxis(90, Vector3.up); //face right
+                score++;
                 break;
             case 2:
                 transform.rotation = Quaternion.AngleAxis(180, Vector3.up); //face backwards
                 break;
             case 3:
                 transform.rotation = Quaternion.AngleAxis(-90, Vector3.up); //face left
+                score--;
                 break;
-
+                
         }
     }
 
@@ -107,6 +121,7 @@ public class GridMovement : MonoBehaviour
     {
         if (PathCheck()) //if bool "canMove" == true
         {
+            
             TurnAndMove(direction); //go to destination position
         }
         else
