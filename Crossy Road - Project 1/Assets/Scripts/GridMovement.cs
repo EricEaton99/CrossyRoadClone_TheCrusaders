@@ -20,7 +20,8 @@ public class GridMovement : MonoBehaviour
     private void Start()
     {
         isMoving = false;
-        highScore = PlayerPrefs.GetInt("Highscore");
+        //setting up highscore prefs
+        PlayerPrefs.SetInt("Highscore", highScore);
     }
 
     void Update()
@@ -61,7 +62,16 @@ public class GridMovement : MonoBehaviour
             }
         }
 
-        ScoreUpdate();
+        
+        //Scoring stuff, tracking the score and highscore.
+        if (score >= highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt("Highscore", highScore);
+            PlayerPrefs.Save();
+        }
+        currentScore.text = "Score: " + score.ToString();
+        currentHighScore.text = "Highscore: " + highScore.ToString();
     }
 
     void TurnAndMove(int direction)
@@ -163,18 +173,5 @@ public class GridMovement : MonoBehaviour
         }
     }
 
-    private void ScoreUpdate()
-    {
-        currentScore.text = "Score: " + score.ToString();
-        currentHighScore.text = "Highscore: " + highScore.ToString();
-        //Scoring stuff, tracking the score and highscore.
-        if (score >= highScore)
-        {
-            highScore = score;
-            PlayerPrefs.SetInt("Highscore", highScore);
-            PlayerPrefs.Save();
-        }
-
-        
-    }
+    
 }
