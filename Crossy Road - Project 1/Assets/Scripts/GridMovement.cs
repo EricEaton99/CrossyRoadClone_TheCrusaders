@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GridMovement : MonoBehaviour
 {
+    [Header("Scoring Stuff")]
+    public int score = 0;
+    public int highScore = 0;
+    public Text currentScore;
+    [Header("Movement Stuff")]
     bool isMoving;
     public GameObject targetPos;
 
