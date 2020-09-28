@@ -135,12 +135,14 @@ public class S_groundTile : MonoBehaviour
                     }
                     if (Random.Range(0, 2) == 0)
                     {
-                        StartCoroutine(WaitAndSpawn(log, i + transform.position.x, Random.Range(1, 2.5f)));
+                        SpawnPreload(log, i + transform.position.x, Random.Range(1, 2.5f));
+                        //StartCoroutine(WaitAndSpawn(log, i + transform.position.x, Random.Range(1, 2.5f)));
                         path = -1;
                     }
                     else
                     {
-                        StartCoroutine(WaitAndSpawn(log, i + transform.position.x, Random.Range(-2.5f, -1)));
+                        SpawnPreload(log, i + transform.position.x, Random.Range(-2.5f, -1));
+                        //StartCoroutine(WaitAndSpawn(log, i + transform.position.x, Random.Range(-2.5f, -1)));
                         path = 10;
                     }
                     break;
@@ -153,12 +155,15 @@ public class S_groundTile : MonoBehaviour
 
                     if (Random.Range(0, 2) == 0)
                     {
-                        StartCoroutine(WaitAndSpawn(car, i + transform.position.x, Random.Range(1, 2.5f)));
+                        SpawnPreload(car, i + transform.position.x, Random.Range(1, 2.5f));
+                        //StartCoroutine(WaitAndSpawn(car, i + transform.position.x, Random.Range(1, 2.5f)));
                         path = -1;
                     }
                     else
                     {
-                        StartCoroutine(WaitAndSpawn(car, i + transform.position.x, Random.Range(-2.5f, -1)));
+                        SpawnPreload(car, i + transform.position.x, Random.Range(-2.5f, -1));
+
+                        //StartCoroutine(WaitAndSpawn(car, i + transform.position.x, Random.Range(-2.5f, -1)));
                         path = 10;
                     }
                     break;
@@ -171,13 +176,42 @@ public class S_groundTile : MonoBehaviour
     }
 
 
+    private void SpawnPreload(GameObject objToSpawn, float location, float speed)
+    {
+        GameObject tempCar;
+        float height;
+        float posForward = 0;
+
+        if (objToSpawn == car)
+        {
+            height = 0.85f;
+        }
+        else
+        {
+            height = 0.6f;
+        }
+        for (int i = 0; i < 4; i++)
+        {
+            float posBase = 12 - 14 * Mathf.Clamp01(speed);
+            posForward += 2.2f / Mathf.Abs(speed) * Random.Range(1, 4) * speed;
+
+
+            tempCar = Instantiate(objToSpawn, new Vector3(location, height, posBase + posForward), Quaternion.Euler(-90, 180 - 180 * Mathf.Clamp01(speed), 0));      //0.85 = y , (speed gives direction, 12 is opposite side of board)
+
+            tempCar.GetComponent<Rigidbody>().velocity = Vector3.forward * speed;
+            StartCoroutine(WaitAndDestroy(tempCar, 14 / Mathf.Abs(speed)));
+        }
+
+        StartCoroutine(WaitAndSpawn(objToSpawn, location, speed));
+    }
+
     IEnumerator WaitAndSpawn(GameObject objToSpawn, float location, float speed)
     {
         yield return new WaitForSeconds(2.2f / Mathf.Abs(speed) * Random.Range(1, 4));
         GameObject tempCar;
         if (objToSpawn == car)
         {
-            tempCar = Instantiate(objToSpawn, new Vector3(location, 0.85f, 12 - 14 * Mathf.Clamp01(speed)), Quaternion.Euler(-90, 180 - 180 * Mathf.Clamp01(speed), 0));      //0.8 = y
+            tempCar = Instantiate(objToSpawn, new Vector3(location, 0.85f, 12 - 14 * Mathf.Clamp01(speed)), Quaternion.Euler(-90, 180 - 180 * Mathf.Clamp01(speed), 0));      //0.85 = y
         }
         else
         {
