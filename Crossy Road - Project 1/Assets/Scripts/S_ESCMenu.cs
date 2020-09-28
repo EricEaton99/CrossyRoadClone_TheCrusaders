@@ -27,10 +27,12 @@ public class S_ESCMenu : MonoBehaviour
     public void OnEPress()
     {
         eMenu.SetActive(true);
+
     }
     public void OnEQuit()
     {
         eMenu.SetActive(false);
+
     }
 
     public void OnQuitClick()
