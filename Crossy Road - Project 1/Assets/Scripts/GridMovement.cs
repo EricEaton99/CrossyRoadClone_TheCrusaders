@@ -1,36 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GridMovement : MonoBehaviour
 {
-    [Header("Scoring Stuff")]
-    public int score = 0;
-    public int highScore = 0;
-    public Text currentScore;
-    [Header("Moving Stuff")]
     bool isMoving;
     public GameObject targetPos;
 
-    bool ridingLog;
 
     private void Start()
     {
-        //setting up highscore prefs
-        PlayerPrefs.SetInt("Highscore", highScore);
-
-        ridingLog = false;
         isMoving = false;
     }
 
     void Update()
     {
-        //Scoring stuff (updating the score script)
-        currentScore.text = "Score: " + score.ToString();
-
-        if (!isMoving)
+        if (!isMoving) //allow movement when player is stationary
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
@@ -66,10 +52,7 @@ public class GridMovement : MonoBehaviour
             }
         }
 
-        if (ridingLog)
-        {
-            
-        }
+
     }
 
     void TurnAndMove(int direction)
@@ -79,20 +62,18 @@ public class GridMovement : MonoBehaviour
         switch (direction) //0 is forward, incrementing clockwise
         {
             case 0:
-                transform.rotation = Quaternion.AngleAxis(0, Vector3.up); //face forwards
+                transform.rotation = Quaternion.AngleAxis(0, Vector3.up);
                 break;
             case 1:
-                transform.rotation = Quaternion.AngleAxis(90, Vector3.up); //face right
-                score++;
+                transform.rotation = Quaternion.AngleAxis(90, Vector3.up);
                 break;
             case 2:
-                transform.rotation = Quaternion.AngleAxis(180, Vector3.up); //face backwards
+                transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
                 break;
             case 3:
-                transform.rotation = Quaternion.AngleAxis(-90, Vector3.up); //face left
-                score--;
+                transform.rotation = Quaternion.AngleAxis(-90, Vector3.up);
                 break;
-                
+
         }
     }
 
@@ -119,9 +100,8 @@ public class GridMovement : MonoBehaviour
 
     void CheckTileAndStartMoving(int direction)
     {
-        if (PathCheck()) //if bool "canMove" == true
+        if (PathCheck()) //if there is not a bush in the way
         {
-            
             TurnAndMove(direction); //go to destination position
         }
         else
@@ -130,11 +110,45 @@ public class GridMovement : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Log"))
+        if (other.gameObject.CompareTag("Log"))
         {
+            transform.parent = other.transform; //set the player as a child, so the player moves with the parent
+            targetPos.transform.parent = other.transform;
+        }
+        else if (other.gameObject.CompareTag("Car"))
+        {
+            Debug.Log("Death by traffic");
+        }
+        else if (other.gameObject.CompareTag("Water"))
+        {
+            if (transform.root == transform)
+            {
+                Debug.Log("Death by hydration");
+            }
+        }
+    }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Log"))
+        {
+            transform.parent = other.transform;
+            targetPos.transform.parent = other.transform; //jump from one log to another, shift direction as needed
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Log"))
+        {
+            transform.parent = null;
+            targetPos.transform.parent = null;
+
+            targetPos.transform.position = new Vector3(Mathf.Round(targetPos.transform.position.x),
+                targetPos.transform.position.y, Mathf.Round(targetPos.transform.position.z));
+            //NEEDS WORK-- When going from water to land, estimate landing location
         }
     }
 }
