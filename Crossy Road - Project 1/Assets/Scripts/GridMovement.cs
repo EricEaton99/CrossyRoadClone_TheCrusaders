@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GridMovement : MonoBehaviour
@@ -9,6 +10,7 @@ public class GridMovement : MonoBehaviour
     public int score = 0;
     public int highScore = 0;
     public Text currentScore;
+    public Text currentHighScore;
     [Header("Movement Stuff")]
     bool isMoving;
     public GameObject targetPos;
@@ -16,11 +18,22 @@ public class GridMovement : MonoBehaviour
 
     private void Start()
     {
+        highScore = PlayerPrefs.GetInt("Highscore");
         isMoving = false;
     }
 
     void Update()
-    {
+    {//Scoring stuff, tracking the score and highscore.
+        if(score>=highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt("Highscore", highScore);
+            PlayerPrefs.Save();
+        }
+        
+        currentScore.text = "Score: " + score.ToString();
+        currentHighScore.text = "Highscore: " + highScore.ToString();
+
         if (!isMoving) //allow movement when player is stationary
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -71,12 +84,14 @@ public class GridMovement : MonoBehaviour
                 break;
             case 1:
                 transform.rotation = Quaternion.AngleAxis(90, Vector3.up);
+                score++;
                 break;
             case 2:
                 transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
                 break;
             case 3:
                 transform.rotation = Quaternion.AngleAxis(-90, Vector3.up);
+                score--;
                 break;
 
         }
