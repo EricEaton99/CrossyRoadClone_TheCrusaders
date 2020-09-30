@@ -22,7 +22,6 @@ public class GridMovement : MonoBehaviour
     {
         isMoving = false;
         //setting up highscore prefs
-        
         highScore = PlayerPrefs.GetInt("Highscore");
         isRidingLog = false;
     }

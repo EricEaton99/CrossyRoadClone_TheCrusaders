@@ -13,13 +13,16 @@ public class GameManager : MonoBehaviour
     [Header("Main Menu")]
     public GameObject helpPanel;
     public Text highscore;
+    public InputField name;
+    public Text playerNameText;
     
 
 
     private void Start()
     {
         frontTile = groundTile1;
-        highscore.text = PlayerPrefs.GetInt("Highscore").ToString();
+        name.text = PlayerPrefs.GetString("PlayerName");
+        highscore.text = PlayerPrefs.GetString("PlayerName") + PlayerPrefs.GetInt("Highscore").ToString();
     }
 
     public void OnFlipButtonClick()
@@ -41,6 +44,9 @@ public class GameManager : MonoBehaviour
     //Main Menu stuff
     public void OnClickStart()
     {
+        
+        PlayerPrefs.SetString("Name", name.text);
+
         SceneManager.LoadScene("Main Game");
         print("The Start button was clicked");
     }
@@ -58,6 +64,15 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
         print("The Quit button was clicked");
+    }
+    public void OnInputEdit()
+    {
+        if(name.text == "")
+        {
+            playerNameText.text = "";
+        }
+        playerNameText.text = "Welcome " + name.text + "!";
+        print("Player's name is " + name.text);
     }
 }
 
