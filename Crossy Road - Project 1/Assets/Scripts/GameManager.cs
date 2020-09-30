@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
             playerNameText.text = "";
         }
         playerNameText.text = "Welcome " + name.text + "!";
-        print("Player's name is " + name.text);
+        print("Player's name is " + PlayerPrefs.GetString("PlayerName"));
     }
 }
 
