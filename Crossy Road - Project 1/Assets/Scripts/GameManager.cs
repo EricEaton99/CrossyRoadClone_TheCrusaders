@@ -21,8 +21,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         frontTile = groundTile1;
-        name.text = PlayerPrefs.GetString("PlayerName");
-        highscore.text = PlayerPrefs.GetString("PlayerName") + PlayerPrefs.GetInt("Highscore").ToString();
+        highscore.text = PlayerPrefs.GetString("PlayerName").ToString() + ": " + PlayerPrefs.GetInt("Highscore").ToString();
     }
 
     public void OnFlipButtonClick()
@@ -44,8 +43,7 @@ public class GameManager : MonoBehaviour
     //Main Menu stuff
     public void OnClickStart()
     {
-        
-        PlayerPrefs.SetString("Name", name.text);
+        PlayerPrefs.Save();
 
         SceneManager.LoadScene("Main Game");
         print("The Start button was clicked");
@@ -67,13 +65,19 @@ public class GameManager : MonoBehaviour
     }
     public void OnInputEdit()
     {
-        if(name.text == "")
+        PlayerPrefs.SetString("PlayerName", name.text);
+        if (name.text == "")
         {
             playerNameText.text = "";
         }
         playerNameText.text = "Welcome " + name.text + "!";
         print("Player's name is " + PlayerPrefs.GetString("PlayerName"));
-        PlayerPrefs.Save();
+        
+    }
+    public void OnClickClearPrefs()
+    {
+        PlayerPrefs.DeleteAll();
+        highscore.text = PlayerPrefs.GetString("PlayerName").ToString() + ": " + PlayerPrefs.GetInt("Highscore").ToString();
     }
 }
 
