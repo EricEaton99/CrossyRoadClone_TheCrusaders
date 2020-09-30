@@ -52,7 +52,6 @@
     <UnityVersion>2020.1.2f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\S_ScoreTracker.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\S_groundTile.cs" />
     <Compile Include="Assets\Scripts\GridMovement.cs" />

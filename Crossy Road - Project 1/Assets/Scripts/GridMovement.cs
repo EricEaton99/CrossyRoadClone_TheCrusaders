@@ -8,22 +8,22 @@ public class GridMovement : MonoBehaviour
 {
     [Header("Scoring Stuff")]
     public int score = 0;
-    public int highScore = 0;
+    public int highScore;
     public Text currentScore;
     public Text currentHighScore;
     [Header("Moving Stuff")]
     bool isMoving;
     public GameObject targetPos;
     bool isRidingLog;
-   
 
+    
 
     private void Start()
     {
         isMoving = false;
         //setting up highscore prefs
-        PlayerPrefs.SetInt("Highscore", highScore);
-
+        
+        highScore = PlayerPrefs.GetInt("Highscore");
         isRidingLog = false;
     }
 
@@ -64,16 +64,18 @@ public class GridMovement : MonoBehaviour
                 transform.position = Vector3.Lerp(transform.position, new Vector3(targetPos.transform.position.x, 1.5f, targetPos.transform.position.z), .3f);
             }
         }
-        
+        currentScore.text = "Score: " + score.ToString();
+        currentHighScore.text = "Highscore: " + highScore.ToString();
         //Scoring stuff, tracking the score and highscore.
         if (score >= highScore)
         {
             highScore = score;
             PlayerPrefs.SetInt("Highscore", highScore);
             PlayerPrefs.Save();
+            
+
         }
-        currentScore.text = "Score: " + score.ToString();
-        currentHighScore.text = "Highscore: " + highScore.ToString();
+
     }
 
     void TurnAndMove(int direction)
