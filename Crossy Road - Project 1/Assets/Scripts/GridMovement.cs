@@ -14,7 +14,6 @@ public class GridMovement : MonoBehaviour
     [Header("Moving Stuff")]
     bool isMoving;
     public GameObject targetPos;
-    bool isRidingLog;
 
     
 
@@ -23,7 +22,6 @@ public class GridMovement : MonoBehaviour
         isMoving = false;
         //setting up highscore prefs
         highScore = PlayerPrefs.GetInt("Highscore");
-        isRidingLog = false;
     }
 
     void Update()
@@ -60,19 +58,16 @@ public class GridMovement : MonoBehaviour
             }
             else //move until the object is close to the point, then snap it to the point
             {
-                transform.position = Vector3.Lerp(transform.position, new Vector3(targetPos.transform.position.x, 1.5f, targetPos.transform.position.z), .3f);
+                transform.position = Vector3.Lerp(transform.position, new Vector3(targetPos.transform.position.x, 1.5f, targetPos.transform.position.z), .35f);
             }
         }
         currentScore.text = "Score: " + score.ToString();
         currentHighScore.text = "Highscore: " + highScore.ToString();
         //Scoring stuff, tracking the score and highscore.
-        if (score >= highScore)
-        {
-            highScore = score;
-            PlayerPrefs.SetInt("Highscore", highScore);
-            PlayerPrefs.Save();
-            
 
+        if (transform.position.z >= 10 || transform.position.z <= -1)
+        {
+            Die();
         }
 
     }
@@ -81,20 +76,20 @@ public class GridMovement : MonoBehaviour
     {
         isMoving = true;
 
-        switch (direction) //0 is forward, incrementing clockwise
+        switch (direction)
         {
             case 0:
-                transform.rotation = Quaternion.AngleAxis(0, Vector3.up); //face forwards
+                transform.rotation = Quaternion.AngleAxis(-90, Vector3.up);
                 break;
             case 1:
-                transform.rotation = Quaternion.AngleAxis(90, Vector3.up); //face right
+                transform.rotation = Quaternion.AngleAxis(0, Vector3.up);
                 score++;
                 break;
             case 2:
-                transform.rotation = Quaternion.AngleAxis(180, Vector3.up); //face backwards
+                transform.rotation = Quaternion.AngleAxis(90, Vector3.up);
                 break;
             case 3:
-                transform.rotation = Quaternion.AngleAxis(-90, Vector3.up); //face left
+                transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
                 score--;
                 break;
 
@@ -105,7 +100,6 @@ public class GridMovement : MonoBehaviour
     {
         bool canMove = false;
         bool bushIsThere = false;
-        Collider[] tiles;
 
         if (targetPos.transform.position.z >= 10 || targetPos.transform.position.z <= -1) //don't go outside the boundaries
         {
@@ -113,15 +107,9 @@ public class GridMovement : MonoBehaviour
         }
         else
         {
-            if (!isRidingLog)
-            {
-                tiles = Physics.OverlapSphere(targetPos.transform.position, .5f); //build a collision sphere with radius .5f at targetPos
-            }
-            else
-            {
-                ExitLogBushCheck(); //Round the position to a whole number BEFORE scanning for trees
-                tiles = Physics.OverlapSphere(targetPos.transform.position, .5f);
-            }
+            targetPos.transform.position = new Vector3(Mathf.Round(targetPos.transform.position.x),
+                targetPos.transform.position.y, Mathf.Round(targetPos.transform.position.z));
+            Collider[] tiles = Physics.OverlapSphere(targetPos.transform.position, .5f);
 
             for (int x = 0; x < tiles.Length; x++)
             {
@@ -156,18 +144,17 @@ public class GridMovement : MonoBehaviour
         {
             transform.parent = other.transform; //set the player as a child, so the player moves with the parent
             targetPos.transform.parent = other.transform;
-            isRidingLog = true;
         }
         else if (other.gameObject.CompareTag("Car"))
         {
             Debug.Log("Death by traffic");
-            //SceneManager.LoadScene("Main Menu");
+            Die();
         }
         else if (other.gameObject.CompareTag("Water"))
         {
             if (transform.root == transform) //if object does not have a parent, IE parented to the log
             {
-                Debug.Log("Death by hydration");
+                Invoke("Die", .1f);
             }
         }
     }
@@ -178,7 +165,7 @@ public class GridMovement : MonoBehaviour
         {
             transform.parent = other.transform;
             targetPos.transform.parent = other.transform; //jump from one log to another, shift direction as needed
-            isRidingLog = true;
+            CancelInvoke();
         }
     }
 
@@ -188,8 +175,6 @@ public class GridMovement : MonoBehaviour
         {
             transform.parent = null;
             targetPos.transform.parent = null;
-
-            isRidingLog = false;
         }
     }
 
@@ -198,9 +183,18 @@ public class GridMovement : MonoBehaviour
         targetPos.transform.position = new Vector3(targetPos.transform.position.x, .6f, targetPos.transform.position.z); //reset destination position
     }
 
-    void ExitLogBushCheck()
+    void Die()
     {
-        targetPos.transform.position = new Vector3(Mathf.Round(targetPos.transform.position.x),
-                targetPos.transform.position.y, Mathf.Round(targetPos.transform.position.z));
+        if (score >= highScore) //update high score after death
+        {
+            highScore = score;
+            PlayerPrefs.SetInt("Highscore", highScore);
+            PlayerPrefs.Save();
+        }
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        SceneManager.LoadScene("Main Menu");
     }
 }
