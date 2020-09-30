@@ -8,20 +8,23 @@ public class GridMovement : MonoBehaviour
 {
     [Header("Scoring Stuff")]
     public int score = 0;
-    public int highScore = 0;
+    public int highScore;
     public Text currentScore;
     public Text currentHighScore;
     [Header("Moving Stuff")]
     bool isMoving;
     public GameObject targetPos;
-   
+    bool isRidingLog;
 
+    
 
     private void Start()
     {
         isMoving = false;
         //setting up highscore prefs
-        PlayerPrefs.SetInt("Highscore", highScore);
+        
+        highScore = PlayerPrefs.GetInt("Highscore");
+        isRidingLog = false;
     }
 
     void Update()
@@ -61,17 +64,18 @@ public class GridMovement : MonoBehaviour
                 transform.position = Vector3.Lerp(transform.position, new Vector3(targetPos.transform.position.x, 1.5f, targetPos.transform.position.z), .3f);
             }
         }
-
-        
+        currentScore.text = "Score: " + score.ToString();
+        currentHighScore.text = "Highscore: " + highScore.ToString();
         //Scoring stuff, tracking the score and highscore.
         if (score >= highScore)
         {
             highScore = score;
             PlayerPrefs.SetInt("Highscore", highScore);
             PlayerPrefs.Save();
+            
+
         }
-        currentScore.text = "Score: " + score.ToString();
-        currentHighScore.text = "Highscore: " + highScore.ToString();
+
     }
 
     void TurnAndMove(int direction)
@@ -102,19 +106,35 @@ public class GridMovement : MonoBehaviour
     {
         bool canMove = false;
         bool bushIsThere = false;
+        Collider[] tiles;
 
-        Collider[] tiles = Physics.OverlapSphere(targetPos.transform.position, .5f); //build a collision sphere with radius .5f at targetPos
-
-        for (int x = 0; x < tiles.Length; x++)
+        if (targetPos.transform.position.z >= 10 || targetPos.transform.position.z <= -1) //don't go outside the boundaries
         {
-            if (tiles[x].gameObject.CompareTag("Bush"))
-            {
-                bushIsThere = true; //move the player unless there's a bush there
-            }
+            Debug.Log("Error... Game board is not there...");
         }
-        if (!bushIsThere)
+        else
         {
-            canMove = true;
+            if (!isRidingLog)
+            {
+                tiles = Physics.OverlapSphere(targetPos.transform.position, .5f); //build a collision sphere with radius .5f at targetPos
+            }
+            else
+            {
+                ExitLogBushCheck(); //Round the position to a whole number BEFORE scanning for trees
+                tiles = Physics.OverlapSphere(targetPos.transform.position, .5f);
+            }
+
+            for (int x = 0; x < tiles.Length; x++)
+            {
+                if (tiles[x].gameObject.CompareTag("Bush"))
+                {
+                    bushIsThere = true; //move the player unless there's a bush there
+                }
+            }
+            if (!bushIsThere)
+            {
+                canMove = true;
+            }
         }
         return canMove;
     }
@@ -127,7 +147,7 @@ public class GridMovement : MonoBehaviour
         }
         else
         {
-            targetPos.transform.position = new Vector3(targetPos.transform.position.x, .6f, targetPos.transform.position.z); //reset destination position
+            ResetTarget();
         }
     }
 
@@ -137,14 +157,16 @@ public class GridMovement : MonoBehaviour
         {
             transform.parent = other.transform; //set the player as a child, so the player moves with the parent
             targetPos.transform.parent = other.transform;
+            isRidingLog = true;
         }
         else if (other.gameObject.CompareTag("Car"))
         {
             Debug.Log("Death by traffic");
+            //SceneManager.LoadScene("Main Menu");
         }
         else if (other.gameObject.CompareTag("Water"))
         {
-            if (transform.root == transform)
+            if (transform.root == transform) //if object does not have a parent, IE parented to the log
             {
                 Debug.Log("Death by hydration");
             }
@@ -157,6 +179,7 @@ public class GridMovement : MonoBehaviour
         {
             transform.parent = other.transform;
             targetPos.transform.parent = other.transform; //jump from one log to another, shift direction as needed
+            isRidingLog = true;
         }
     }
 
@@ -167,11 +190,18 @@ public class GridMovement : MonoBehaviour
             transform.parent = null;
             targetPos.transform.parent = null;
 
-            targetPos.transform.position = new Vector3(Mathf.Round(targetPos.transform.position.x),
-                targetPos.transform.position.y, Mathf.Round(targetPos.transform.position.z));
-            //NEEDS WORK-- When going from water to land, estimate landing location
+            isRidingLog = false;
         }
     }
 
-    
+    void ResetTarget()
+    {
+        targetPos.transform.position = new Vector3(targetPos.transform.position.x, .6f, targetPos.transform.position.z); //reset destination position
+    }
+
+    void ExitLogBushCheck()
+    {
+        targetPos.transform.position = new Vector3(Mathf.Round(targetPos.transform.position.x),
+                targetPos.transform.position.y, Mathf.Round(targetPos.transform.position.z));
+    }
 }
