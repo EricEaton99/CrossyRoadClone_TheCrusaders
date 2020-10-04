@@ -15,6 +15,8 @@ public class GridMovement : MonoBehaviour
     bool isMoving;
     public GameObject targetPos;
 
+    bool inWater = false;
+
     
 
     private void Start()
@@ -65,11 +67,10 @@ public class GridMovement : MonoBehaviour
         currentHighScore.text = "Highscore: " + highScore.ToString();
         //Scoring stuff, tracking the score and highscore.
 
-        if (transform.position.z >= 10 || transform.position.z <= -1)
+        if (transform.position.z >= 10 || transform.position.z <= -1) //for out-of-bounds logs
         {
             Die();
         }
-
     }
 
     void TurnAndMove(int direction)
@@ -103,7 +104,11 @@ public class GridMovement : MonoBehaviour
 
         if (targetPos.transform.position.z >= 10 || targetPos.transform.position.z <= -1) //don't go outside the boundaries
         {
-            Debug.Log("Error... Game board is not there...");
+            Debug.Log("Error... Horizontal game board is not there...");
+        }
+        else if (targetPos.transform.position.x >= 21 || targetPos.transform.position.x <= -2)
+        {
+            Debug.Log("Error... Vertical game board is not there...");
         }
         else
         {
@@ -152,9 +157,10 @@ public class GridMovement : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Water"))
         {
-            if (transform.root == transform) //if object does not have a parent, IE parented to the log
+            inWater = true;
+            if (transform.root == transform) //if player is not on a log
             {
-                Invoke("Die", .1f);
+                Invoke("Die", .1f); //works when going from land
             }
         }
     }
@@ -166,6 +172,7 @@ public class GridMovement : MonoBehaviour
             transform.parent = other.transform;
             targetPos.transform.parent = other.transform; //jump from one log to another, shift direction as needed
             CancelInvoke();
+            inWater = false;
         }
     }
 
@@ -175,6 +182,11 @@ public class GridMovement : MonoBehaviour
         {
             transform.parent = null;
             targetPos.transform.parent = null;
+
+            if (inWater)
+            {
+                Die(); //if player jumps from log to water
+            }
         }
     }
 
