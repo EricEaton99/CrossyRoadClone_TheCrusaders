@@ -57,6 +57,7 @@
     <Compile Include="Assets\Scripts\S_groundTile.cs" />
     <Compile Include="Assets\Scripts\GridMovement.cs" />
     <Compile Include="Assets\Scripts\S_ESCMenu.cs" />
+    <Compile Include="Assets\Scripts\CameraFollow.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\SimplePixelUI\fonts\Font2\license.txt" />
