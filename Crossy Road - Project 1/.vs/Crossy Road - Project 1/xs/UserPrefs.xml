@@ -1,10 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GridMovement.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/GridMovement.cs" Line="42" Column="62" />
+      <File FileName="Assets/Scripts/GridMovement.cs" Line="257" Column="147" />
       <File FileName="Assets/Scripts/S_ESCMenu.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GameManager.cs" Line="16" Column="28" />
-      <File FileName="Assets/Scripts/S_groundTile.cs" />
+      <File FileName="Assets/Scripts/GameManager.cs" Line="29" Column="92" />
+      <File FileName="Assets/Scripts/S_groundTile.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

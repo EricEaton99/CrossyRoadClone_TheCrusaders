@@ -18,6 +18,10 @@ public class GridMovement : MonoBehaviour
     bool inWater;
     bool isInvicible;
 
+    int minVerticalValue;
+    public GameObject startCube;
+    public GameObject endCube;
+
     GameManager gManager;
 
     private void Start()
@@ -25,6 +29,8 @@ public class GridMovement : MonoBehaviour
         inWater = false;
 
         isMoving = false;
+
+        minVerticalValue = -2;
 
         //setting up highscore prefs
         highScore = PlayerPrefs.GetInt("Highscore");
@@ -36,8 +42,7 @@ public class GridMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            gManager.OnFlipButtonClick();
-            ResetPlayerPosition();
+            ActivateFlip();
         }
         else if (Input.GetKeyDown(KeyCode.I)) //developer key
         {
@@ -131,7 +136,7 @@ public class GridMovement : MonoBehaviour
         {
             Debug.Log("Error... Horizontal game board is not there...");
         }
-        else if (targetPos.transform.position.x <= -2)
+        else if (targetPos.transform.position.x <= minVerticalValue)
         {
             Debug.Log("Error... Vertical game board is not there...");
         }
@@ -197,8 +202,7 @@ public class GridMovement : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Exit")) //ending platform
         {
-            gManager.OnFlipButtonClick();
-            ResetPlayerPosition();
+            ActivateFlip();
         }
     }
 
@@ -247,10 +251,17 @@ public class GridMovement : MonoBehaviour
         SceneManager.LoadScene("Main Menu");
     }
 
-    void ResetPlayerPosition()
+    void ResetPositions()
     {
-        transform.position = new Vector3(-1, transform.position.y, transform.position.z);
-        targetPos.transform.position = new Vector3(-1, transform.position.y, transform.position.z);
+        startCube.transform.position = new Vector3((startCube.transform.position.x + 11), startCube.transform.position.y, startCube.transform.position.z);
+        endCube.transform.position = new Vector3((endCube.transform.position.x + 11), endCube.transform.position.y, endCube.transform.position.z);
+    }
+
+    void ActivateFlip()
+    {
+        gManager.OnFlipButtonClick();
+        minVerticalValue += 11;
+        ResetPositions();
     }
 
 }
