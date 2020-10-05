@@ -751,7 +751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundTile1: {fileID: 508469562}
-  groundTile2: {fileID: 2000498401}
+  groundTile2: {fileID: 547571514}
   helpPanel: {fileID: 0}
   highscore: {fileID: 0}
   name: {fileID: 0}
@@ -1929,7 +1929,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2000498402
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -36,9 +36,20 @@ public class GridMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            isInvicible = true;
             gManager.OnFlipButtonClick();
             ResetPlayerPosition();
+        }
+        else if (Input.GetKeyDown(KeyCode.I)) //developer key
+        {
+            if (!isInvicible)
+            {
+                isInvicible = true;
+            }
+            else
+            {
+                isInvicible = false;
+            }
+            Debug.Log("isInvincible = " + isInvicible);
         }
 
         if (!isMoving)
@@ -180,7 +191,7 @@ public class GridMovement : MonoBehaviour
 
                 if (transform.root == transform) //if player is not on a log
                 {
-                    Invoke("Die", .1f); //works when going from land
+                    Invoke("Die", .1f);
                 }
             }
         }
@@ -211,7 +222,7 @@ public class GridMovement : MonoBehaviour
 
             if (inWater)
             {
-                Die(); //if player jumps from log to water
+                Invoke("Die", .1f); //if player jumps from log to water
             }
         }
     }
