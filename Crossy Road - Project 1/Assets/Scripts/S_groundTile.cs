@@ -18,7 +18,7 @@ public class S_groundTile : MonoBehaviour
     List<GameObject> objBacklog = new List<GameObject>();
     int path = 5;
 
-    private void Start()
+    void Start()
     {
         for (int j = 0; j < 4; j++)
         {

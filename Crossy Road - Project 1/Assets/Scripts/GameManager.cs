@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     public void OnFlipButtonClick()
     {
-        frontTile.transform.position = Vector3.right * (frontTile.transform.position.x + 20);
+        frontTile.transform.position = Vector3.right * (frontTile.transform.position.x);
         frontTile.GetComponent<S_groundTile>().ClearArray();
         frontTile.GetComponent<S_groundTile>().Shuffle();
 

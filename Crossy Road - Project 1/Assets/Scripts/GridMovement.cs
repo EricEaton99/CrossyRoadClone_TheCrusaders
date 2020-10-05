@@ -15,19 +15,32 @@ public class GridMovement : MonoBehaviour
     bool isMoving;
     public GameObject targetPos;
 
-    bool inWater = false;
+    bool inWater;
+    bool isInvicible;
 
-    
+    GameManager gManager;
 
     private void Start()
     {
+        inWater = false;
+
         isMoving = false;
+
         //setting up highscore prefs
         highScore = PlayerPrefs.GetInt("Highscore");
+
+        gManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            isInvicible = true;
+            gManager.OnFlipButtonClick();
+            ResetPlayerPosition();
+        }
+
         if (!isMoving)
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -53,7 +66,7 @@ public class GridMovement : MonoBehaviour
         }
         else
         {
-            if (Mathf.Abs(targetPos.transform.position.x - transform.position.x) <.1 && Mathf.Abs(targetPos.transform.position.z - transform.position.z) < .1)
+            if (Mathf.Abs(targetPos.transform.position.x - transform.position.x) < .1 && Mathf.Abs(targetPos.transform.position.z - transform.position.z) < .1)
             {
                 transform.position = new Vector3(targetPos.transform.position.x, 1.5f, targetPos.transform.position.z);
                 isMoving = false;
@@ -63,11 +76,12 @@ public class GridMovement : MonoBehaviour
                 transform.position = Vector3.Lerp(transform.position, new Vector3(targetPos.transform.position.x, 1.5f, targetPos.transform.position.z), .35f);
             }
         }
+
         currentScore.text = "Score: " + score.ToString();
         currentHighScore.text = "Highscore: " + highScore.ToString();
         //Scoring stuff, tracking the score and highscore.
 
-        if (transform.position.z >= 10 || transform.position.z <= -1) //for out-of-bounds logs
+        if (transform.position.z >= 10 || transform.position.z <= -1) //when the player is on out-of-bounds logs
         {
             Die();
         }
@@ -106,7 +120,7 @@ public class GridMovement : MonoBehaviour
         {
             Debug.Log("Error... Horizontal game board is not there...");
         }
-        else if (targetPos.transform.position.x >= 21 || targetPos.transform.position.x <= -2)
+        else if (targetPos.transform.position.x <= -2)
         {
             Debug.Log("Error... Vertical game board is not there...");
         }
@@ -152,16 +166,28 @@ public class GridMovement : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Car"))
         {
-            Debug.Log("Death by traffic");
-            Die();
+            if (!isInvicible)
+            {
+                Debug.Log("Death by traffic");
+                Die();
+            }
         }
         else if (other.gameObject.CompareTag("Water"))
         {
-            inWater = true;
-            if (transform.root == transform) //if player is not on a log
+            if (!isInvicible)
             {
-                Invoke("Die", .1f); //works when going from land
+                inWater = true;
+
+                if (transform.root == transform) //if player is not on a log
+                {
+                    Invoke("Die", .1f); //works when going from land
+                }
             }
+        }
+        else if (other.gameObject.CompareTag("Exit")) //ending platform
+        {
+            gManager.OnFlipButtonClick();
+            ResetPlayerPosition();
         }
     }
 
@@ -209,4 +235,11 @@ public class GridMovement : MonoBehaviour
 
         SceneManager.LoadScene("Main Menu");
     }
+
+    void ResetPlayerPosition()
+    {
+        transform.position = new Vector3(-1, transform.position.y, transform.position.z);
+        targetPos.transform.position = new Vector3(-1, transform.position.y, transform.position.z);
+    }
+
 }
