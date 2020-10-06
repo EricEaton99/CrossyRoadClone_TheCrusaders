@@ -30,12 +30,14 @@ public class S_ESCMenu : MonoBehaviour
         eMenu.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        Time.timeScale = 0;
     }
     public void OnEQuit()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         eMenu.SetActive(false);
+        Time.timeScale = 1;
     }
 
     public void OnClickMainMenu()

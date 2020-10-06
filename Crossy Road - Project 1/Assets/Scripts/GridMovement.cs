@@ -19,13 +19,13 @@ public class GridMovement : MonoBehaviour
     bool isInvicible;
 
     int minVerticalValue;
-    public GameObject startCube;
     public GameObject endCube;
 
     GameManager gManager;
 
     private void Start()
     {
+        Time.timeScale = 1;
         inWater = false;
 
         isMoving = false;
@@ -40,11 +40,7 @@ public class GridMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            ActivateFlip();
-        }
-        else if (Input.GetKeyDown(KeyCode.I)) //developer key
+        if (Input.GetKeyDown(KeyCode.I)) //developer key
         {
             if (!isInvicible)
             {
@@ -89,7 +85,13 @@ public class GridMovement : MonoBehaviour
             }
             else //move until the object is close to the point, then snap it to the point
             {
+
                 transform.position = Vector3.Lerp(transform.position, new Vector3(targetPos.transform.position.x, 1.5f, targetPos.transform.position.z), .35f);
+                if (targetPos.transform.position.z != Mathf.RoundToInt(targetPos.transform.position.z))
+                {
+                    targetPos.transform.position = new Vector3(targetPos.transform.position.x,
+                        targetPos.transform.position.y, Mathf.RoundToInt(targetPos.transform.position.z));
+                }
             }
         }
 
@@ -142,8 +144,12 @@ public class GridMovement : MonoBehaviour
         }
         else
         {
-            targetPos.transform.position = new Vector3(Mathf.Round(targetPos.transform.position.x),
-                targetPos.transform.position.y, Mathf.Round(targetPos.transform.position.z));
+            if (targetPos.transform.position.x != transform.position.x) //check only if going forward or backward
+            {
+                targetPos.transform.position = new Vector3(targetPos.transform.position.x,
+                targetPos.transform.position.y, Mathf.RoundToInt(targetPos.transform.position.z));
+            }
+
             Collider[] tiles = Physics.OverlapSphere(targetPos.transform.position, .5f);
 
             for (int x = 0; x < tiles.Length; x++)
@@ -153,6 +159,7 @@ public class GridMovement : MonoBehaviour
                     bushIsThere = true; //move the player unless there's a bush there
                 }
             }
+
             if (!bushIsThere)
             {
                 canMove = true;
@@ -253,14 +260,13 @@ public class GridMovement : MonoBehaviour
 
     void ResetPositions()
     {
-        startCube.transform.position = new Vector3((startCube.transform.position.x + 11), startCube.transform.position.y, startCube.transform.position.z);
-        endCube.transform.position = new Vector3((endCube.transform.position.x + 11), endCube.transform.position.y, endCube.transform.position.z);
+        endCube.transform.position = new Vector3((endCube.transform.position.x + 10), endCube.transform.position.y, endCube.transform.position.z);
     }
 
     void ActivateFlip()
     {
         gManager.OnFlipButtonClick();
-        minVerticalValue += 11;
+        minVerticalValue += 10;
         ResetPositions();
     }
 
