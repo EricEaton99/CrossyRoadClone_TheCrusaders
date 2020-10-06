@@ -37,7 +37,7 @@ public class S_groundTile : MonoBehaviour
         }
 
 
-        Shuffle();
+        //Shuffle();
     }
 
     public void ClearArray()
@@ -172,6 +172,160 @@ public class S_groundTile : MonoBehaviour
                     break;
             }
             path = goal;        //set path to goal for next row
+        }
+    }
+
+
+    public void OnBeginPlayPath()
+    {
+        Instantiate(tile_path, new Vector3(transform.position.x, 0, -1), Quaternion.identity);
+        Debug.LogError("NewTile");
+        int goal = 5;
+        int season = Random.Range(0, 3);
+        print("Season = " + season);
+        for (int i = 0; i < 10; i++)
+        {
+            if (i < 1)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    //print("seasonTileset[season, 1].name = " + seasonTileset[season, 1].name);
+                    tileGrid[i, j] = Instantiate(seasonTileset[season, 1], new Vector3(i + transform.position.x, 0, j), Quaternion.Euler(0, Random.Range(0, 3) * 90, 0));
+                }
+            }
+            else if (i < 3)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    if(j > 3 && j < 6)
+                    {
+                        tileGrid[i, j] = Instantiate(seasonTileset[season, 0], new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
+                    }
+                    else
+                    {
+                        if (Random.Range(0, 2) == 0)
+                        {
+                            //print("seasonTileset[season, 0].name = " + seasonTileset[season, 0].name);
+                            tileGrid[i, j] = Instantiate(seasonTileset[season, 0], new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
+                        }
+                        else
+                        {
+                            //print("seasonTileset[season, 1].name = " + seasonTileset[season, 1].name);
+                            tileGrid[i, j] = Instantiate(seasonTileset[season, 1], new Vector3(i + transform.position.x, 0, j), Quaternion.Euler(0, Random.Range(0, 3) * 90, 0));
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("path is " + path);
+                switch (Random.Range(0, 3))
+                {
+                    case 0:                                     //can create walls
+
+                        if (path < 0)       //Ensures that there is always a path forward
+                        {
+                            path = Random.Range(5, 10);
+                            goal = -1;
+                        }
+                        else if (path < 3)
+                        {
+                            goal = path + Random.Range(0, 3);
+                        }
+                        else if (path < 7)
+                        {
+                            goal = path + Random.Range(-3, 3);
+                        }
+                        else if (path < 10)
+                        {
+                            goal = path + Random.Range(-3, 0);
+                        }
+                        else if (path == 10)
+                        {
+                            path = Random.Range(0, 5);
+                            goal = -1;
+                        }
+                        else
+                        {
+                            Debug.Log("int: Path, is out of range");
+                        }
+
+                        Debug.Log("goal is " + goal);
+
+
+                        for (int j = 0; j < 10; j++)
+                        {
+                            //Debug.Log(i + ", " + j);
+                            if (((j > path && j < goal) || (j < path && j > goal)) && !(goal < 0))
+                            {
+                                tileGrid[i, j] = Instantiate(tile_path, new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
+                            }
+                            else if (j == path)
+                            {
+                                tileGrid[i, j] = Instantiate(tile_path, new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
+                            }
+                            else if (j == goal)
+                            {
+                                tileGrid[i, j] = Instantiate(tile_goal, new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
+                            }
+                            else if (Random.Range(0, 2) == 0)
+                            {
+                                //print("seasonTileset[season, 0].name = " + seasonTileset[season, 0].name);
+                                tileGrid[i, j] = Instantiate(seasonTileset[season, 0], new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
+                            }
+                            else
+                            {
+                                //print("seasonTileset[season, 1].name = " + seasonTileset[season, 1].name);
+                                tileGrid[i, j] = Instantiate(seasonTileset[season, 1], new Vector3(i + transform.position.x, 0, j), Quaternion.Euler(0, Random.Range(0, 3) * 90, 0));
+                            }
+                        }
+                        break;
+                    case 1:
+                        for (int j = 0; j < 10; j++)
+                        {
+                            //Debug.Log(i + ", " + j);
+                            tileGrid[i, j] = Instantiate(seasonTileset[season, 2], new Vector3(i + transform.position.x, -0.05f, j), Quaternion.identity);
+                        }
+                        if (Random.Range(0, 2) == 0)
+                        {
+                            SpawnPreload(log, i + transform.position.x, Random.Range(1, 2.5f));
+                            //StartCoroutine(WaitAndSpawn(log, i + transform.position.x, Random.Range(1, 2.5f)));
+                            path = -1;
+                        }
+                        else
+                        {
+                            SpawnPreload(log, i + transform.position.x, Random.Range(-2.5f, -1));
+                            //StartCoroutine(WaitAndSpawn(log, i + transform.position.x, Random.Range(-2.5f, -1)));
+                            path = 10;
+                        }
+                        break;
+                    case 2:
+                        for (int j = 0; j < 10; j++)
+                        {
+                            //Debug.Log(i + ", " + j);
+                            tileGrid[i, j] = Instantiate(seasonTileset[season, 3], new Vector3(i + transform.position.x, -0.025f, j), Quaternion.identity);
+                        }
+
+                        if (Random.Range(0, 2) == 0)
+                        {
+                            SpawnPreload(car, i + transform.position.x, Random.Range(1, 2.5f));
+                            //StartCoroutine(WaitAndSpawn(car, i + transform.position.x, Random.Range(1, 2.5f)));
+                            path = -1;
+                        }
+                        else
+                        {
+                            SpawnPreload(car, i + transform.position.x, Random.Range(-2.5f, -1));
+
+                            //StartCoroutine(WaitAndSpawn(car, i + transform.position.x, Random.Range(-2.5f, -1)));
+                            path = 10;
+                        }
+                        break;
+                    default:
+                        Debug.Log("Tile index does not exist.");
+                        break;
+                }
+                path = goal;        //set path to goal for next row
+            }
         }
     }
 
