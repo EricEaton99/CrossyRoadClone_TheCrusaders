@@ -16,19 +16,22 @@ public class GridMovement : MonoBehaviour
     public GameObject targetPos;
 
     bool inWater;
-    bool isInvicible;
+    bool isInvincible;
 
     int minVerticalValue;
     public GameObject endCube;
 
     GameManager gManager;
 
+    bool onLog;
+
     private void Start()
     {
         Time.timeScale = 1;
-        inWater = false;
 
+        inWater = false;
         isMoving = false;
+        onLog = false;
 
         minVerticalValue = -2;
 
@@ -42,15 +45,15 @@ public class GridMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I)) //developer key
         {
-            if (!isInvicible)
+            if (!isInvincible)
             {
-                isInvicible = true;
+                isInvincible = true;
             }
             else
             {
-                isInvicible = false;
+                isInvincible = false;
             }
-            Debug.Log("isInvincible = " + isInvicible);
+            Debug.Log("isInvincible = " + isInvincible);
         }
 
         if (!isMoving)
@@ -87,7 +90,7 @@ public class GridMovement : MonoBehaviour
             {
 
                 transform.position = Vector3.Lerp(transform.position, new Vector3(targetPos.transform.position.x, 1.5f, targetPos.transform.position.z), .35f);
-                if (targetPos.transform.position.z != Mathf.RoundToInt(targetPos.transform.position.z))
+                if (targetPos.transform.position.z != Mathf.RoundToInt(targetPos.transform.position.z) && !onLog)
                 {
                     targetPos.transform.position = new Vector3(targetPos.transform.position.x,
                         targetPos.transform.position.y, Mathf.RoundToInt(targetPos.transform.position.z));
@@ -186,10 +189,11 @@ public class GridMovement : MonoBehaviour
         {
             transform.parent = other.transform; //set the player as a child, so the player moves with the parent
             targetPos.transform.parent = other.transform;
+            onLog = true;
         }
         else if (other.gameObject.CompareTag("Car"))
         {
-            if (!isInvicible)
+            if (!isInvincible)
             {
                 Debug.Log("Death by traffic");
                 Die();
@@ -197,13 +201,13 @@ public class GridMovement : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Water"))
         {
-            if (!isInvicible)
+            if (!isInvincible)
             {
                 inWater = true;
 
                 if (transform.root == transform) //if player is not on a log
                 {
-                    Invoke("Die", .1f);
+                    Invoke("Die", .05f);
                 }
             }
         }
@@ -221,6 +225,11 @@ public class GridMovement : MonoBehaviour
             targetPos.transform.parent = other.transform; //jump from one log to another, shift direction as needed
             CancelInvoke();
             inWater = false;
+            onLog = true;
+        }
+        if (other.gameObject.CompareTag("Water"))
+        {
+            Invoke("Die", .05f); //since player collides with water while on a log, this code must be in Stay
         }
     }
 
@@ -230,11 +239,7 @@ public class GridMovement : MonoBehaviour
         {
             transform.parent = null;
             targetPos.transform.parent = null;
-
-            if (inWater)
-            {
-                Invoke("Die", .1f); //if player jumps from log to water
-            }
+            onLog = false;
         }
     }
 
