@@ -241,12 +241,6 @@ public class GridMovement : MonoBehaviour
             targetPos.transform.parent = null;
             onLog = false;
         }
-        else if (other.gameObject.CompareTag("Water"))
-        {
-            onLog = false;
-            inWater = false;
-            CancelInvoke();
-        }
     }
 
     void ResetTarget()
