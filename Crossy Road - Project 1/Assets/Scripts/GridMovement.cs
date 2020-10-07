@@ -270,7 +270,6 @@ public class GridMovement : MonoBehaviour
 
     void ActivateFlip()
     {
-        Debug.Log("Flipping engage!");
         gManager.OnFlipButtonClick();
         minVerticalValue += 10;
         ResetPositions();
