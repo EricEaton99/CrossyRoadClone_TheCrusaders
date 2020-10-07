@@ -38,6 +38,12 @@ public class S_ESCMenu : MonoBehaviour
         Cursor.visible = false;
         eMenu.SetActive(false);
         Time.timeScale = 1;
+        print("Quit button was pressed");
+    }
+
+    public void OnEResume() //I can't get this to work and I don't know why. Im sure im missing something super simple.
+    {
+        OnEPress();
     }
 
     public void OnClickMainMenu()
