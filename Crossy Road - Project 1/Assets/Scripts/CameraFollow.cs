@@ -13,7 +13,7 @@ public class CameraFollow : MonoBehaviour
 
     void Update()
     {
-        if (4.5f < thePlayer.transform.position.z && thePlayer.transform.position.z < 6.5f)
+        if (4f <= thePlayer.transform.position.z && thePlayer.transform.position.z <= 7f)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, thePlayer.transform.position.z - 1);
             print("move cam");
