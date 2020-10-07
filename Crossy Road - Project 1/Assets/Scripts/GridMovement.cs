@@ -241,6 +241,12 @@ public class GridMovement : MonoBehaviour
             targetPos.transform.parent = null;
             onLog = false;
         }
+        else if (other.gameObject.CompareTag("Water"))
+        {
+            onLog = false;
+            inWater = false;
+            CancelInvoke();
+        }
     }
 
     void ResetTarget()
@@ -270,6 +276,7 @@ public class GridMovement : MonoBehaviour
 
     void ActivateFlip()
     {
+        Debug.Log("Flipping...");
         gManager.OnFlipButtonClick();
         minVerticalValue += 10;
         ResetPositions();

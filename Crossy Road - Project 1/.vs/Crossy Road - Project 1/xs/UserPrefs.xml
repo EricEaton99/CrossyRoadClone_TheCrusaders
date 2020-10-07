@@ -1,31 +1,12 @@
 ﻿<Properties StartupConfiguration="{693C19CA-0C90-0D11-5363-B81712EC4858}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GridMovement.cs">
     <Files>
-<<<<<<< HEAD
-<<<<<<< HEAD
-      <File FileName="Assets/Scripts/GridMovement.cs" Line="279" Column="39" />
-=======
-      <File FileName="Assets/Scripts/GridMovement.cs" Line="232" Column="110" />
->>>>>>> parent of 03be634... no longer sometimes die when exiting a log
-=======
-      <File FileName="Assets/Scripts/GridMovement.cs" Line="244" Column="17" />
->>>>>>> parent of cfe0e18... playtesting
-      <File FileName="Assets/Scripts/S_ESCMenu.cs" />
-      <File FileName="Assets/Scripts/GameManager.cs" />
-      <File FileName="Assets/Scripts/S_groundTile.cs" />
+      <File FileName="Assets/Scripts/GridMovement.cs" Line="247" Column="29" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-<<<<<<< HEAD
-<<<<<<< HEAD
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="f8dabb7c-0ff7-44c9-9c25-58b01ab76330" />
-=======
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="075fb388-a96f-4337-826d-a88047311fbc" />
->>>>>>> parent of 03be634... no longer sometimes die when exiting a log
-=======
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="9a6e0b3e-9f46-48c4-9da1-bcb710b03470" />
->>>>>>> parent of cfe0e18... playtesting
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="c265f666-ebeb-4039-87e2-dd54dedffbcd" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
