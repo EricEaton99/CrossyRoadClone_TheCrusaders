@@ -62,8 +62,11 @@
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <Compile Include="Assets\dreamlo\LeaderBoardSample.cs" />
     <Compile Include="Assets\dreamlo\dreamloLeaderBoard.cs" />
+=======
+>>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
 =======
 >>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
 =======
