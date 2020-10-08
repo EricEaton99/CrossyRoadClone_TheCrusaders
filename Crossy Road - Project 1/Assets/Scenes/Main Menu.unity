@@ -2620,8 +2620,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e022dfa2de230f41928486d4fe82655, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundTile1: {fileID: 0}
-  groundTile2: {fileID: 0}
+  groundTile1: {fileID: 1676355752}
+  groundTile2: {fileID: 297927644}
   helpPanel: {fileID: 2076955701}
   highscore: {fileID: 776738968}
   name: {fileID: 1618650831}
@@ -2638,7 +2638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68134a9dee32e4643a9ad856faf15afc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverSound: {fileID: 8300000, guid: 1b48d1b78b338254baaa82f7df3ac3e9, type: 3}
+  hoverSound: {fileID: 0}
   clickSound: {fileID: 8300000, guid: 5c1e2b065770f4542b4a75090d5f9426, type: 3}
   myFx: {fileID: 1766257330}
 --- !u!82 &1766257330
