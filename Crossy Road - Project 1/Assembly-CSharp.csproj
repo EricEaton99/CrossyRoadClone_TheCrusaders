@@ -60,13 +60,15 @@
     <Compile Include="Assets\Scripts\S_ESCMenu.cs" />
     <Compile Include="Assets\Scripts\S_UIAudio.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
+<<<<<<< HEAD
     <Compile Include="Assets\dreamlo\LeaderBoardSample.cs" />
     <Compile Include="Assets\dreamlo\dreamloLeaderBoard.cs" />
+=======
+>>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\SimplePixelUI\fonts\Font2\license.txt" />
      <None Include="Assets\SimplePixelUI\fonts\Font1\license.txt" />
-     <None Include="Assets\dreamlo\README_FIRST.txt" />
      <None Include="Assets\SimplePixelUI\fonts\Font1\readme.txt" />
      <None Include="Assets\SimplePixelUI\fonts\Font2\readme.txt" />
     <Reference Include="UnityEngine">

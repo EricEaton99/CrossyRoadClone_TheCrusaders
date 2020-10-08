@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         frontTile = groundTile1;
-        highscore.text = PlayerPrefs.GetString("HighPlayerName").ToString() + ": " + PlayerPrefs.GetInt("Highscore").ToString();
+        highscore.text = PlayerPrefs.GetString("PlayerName").ToString() + ": " + PlayerPrefs.GetInt("Highscore").ToString();
 
         groundTile1.GetComponent<S_groundTile>().OnBeginPlayPath();
         groundTile2.GetComponent<S_groundTile>().Shuffle();
