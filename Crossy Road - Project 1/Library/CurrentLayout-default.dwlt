@@ -20,9 +20,12 @@ MonoBehaviour:
     height: 941
   m_ShowMode: 4
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Title: Hierarchy
   m_RootView: {fileID: 2}
 =======
+=======
+>>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
   m_Title: Inspector
   m_RootView: {fileID: 8}
 >>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
@@ -103,6 +106,9 @@ MonoBehaviour:
   m_MaxSize: {x: 14001, y: 10021}
   vertical: 0
   controlID: 23
+<<<<<<< HEAD
+>>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
+=======
 >>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
 --- !u!114 &4
 MonoBehaviour:
@@ -134,6 +140,9 @@ MonoBehaviour:
   m_MaxSize: {x: 18002, y: 14042}
   vertical: 0
   controlID: 21
+<<<<<<< HEAD
+>>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
+=======
 >>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
 --- !u!114 &5
 MonoBehaviour:
@@ -427,6 +436,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -439,6 +449,13 @@ MonoBehaviour:
   - {fileID: 18}
   - {fileID: 14}
   m_Selected: 0
+=======
+  m_ActualView: {fileID: 18}
+  m_Panes:
+  - {fileID: 18}
+  - {fileID: 14}
+  m_Selected: 0
+>>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
   m_LastSelected: 1
 --- !u!114 &14
 MonoBehaviour:
@@ -466,6 +483,9 @@ MonoBehaviour:
     height: 438
   m_ViewDataDictionary: {fileID: 0}
 --- !u!114 &15
+<<<<<<< HEAD
+>>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
+=======
 >>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -613,6 +633,9 @@ MonoBehaviour:
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 115
 --- !u!114 &16
+<<<<<<< HEAD
+>>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
+=======
 >>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -719,6 +742,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_PreviewWindow: {fileID: 0}
 --- !u!114 &17
+<<<<<<< HEAD
+>>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
+=======
 >>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -748,9 +774,15 @@ MonoBehaviour:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
       m_SelectedIDs: 8e370000
       m_LastClickedID: 14222
       m_ExpandedIDs: 32fbffff
+=======
+      m_SelectedIDs: 803c0000
+      m_LastClickedID: 15488
+      m_ExpandedIDs: 9cc9ffff62fbffff2a3c0000
+>>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
 =======
       m_SelectedIDs: 803c0000
       m_LastClickedID: 15488
@@ -780,7 +812,11 @@ MonoBehaviour:
     m_CurrentSortingName: TransformSorting
   m_WindowGUID: 3996d0ecf72e8e942b4a6b0a87371f7f
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!114 &16
+=======
+--- !u!114 &18
+>>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
 =======
 --- !u!114 &18
 >>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
@@ -871,7 +907,11 @@ MonoBehaviour:
     m_Target: {x: -0.3070683, y: 0.03339252, z: -0.010781687, w: -0.9510404}
     speed: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Value: {x: -0.23653825, y: -0.008164421, z: 0.001987647, w: -0.9715863}
+=======
+    m_Value: {x: -0.3070683, y: 0.03339252, z: -0.010781687, w: -0.9510404}
+>>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
 =======
     m_Value: {x: -0.3070683, y: 0.03339252, z: -0.010781687, w: -0.9510404}
 >>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
@@ -904,7 +944,11 @@ MonoBehaviour:
   m_LastLockedObject: {fileID: 0}
   m_ViewIsLockedToObject: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!114 &17
+=======
+--- !u!114 &19
+>>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
 =======
 --- !u!114 &19
 >>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
@@ -1137,6 +1181,9 @@ MonoBehaviour:
   m_XRRenderMode: 0
   m_RenderTexture: {fileID: 0}
 --- !u!114 &20
+<<<<<<< HEAD
+>>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
+=======
 >>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1188,6 +1235,7 @@ MonoBehaviour:
     height: 870
   m_ViewDataDictionary: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_ObjectsLockedBeforeSerialization: []
   m_InstanceIDsLockedBeforeSerialization: 
   m_PreviewResizer:
@@ -1201,6 +1249,8 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_PreviewWindow: {fileID: 0}
+=======
+>>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
 =======
 >>>>>>> parent of ab7b5312... Highscore fixed. Groundwork for global leaderboards.
 --- !u!114 &21
