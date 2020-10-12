@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\S_ESCMenu.cs" />
     <Compile Include="Assets\Scripts\S_UIAudio.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\S_dayNightCycle.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\SimplePixelUI\fonts\Font2\license.txt" />

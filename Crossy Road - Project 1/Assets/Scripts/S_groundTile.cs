@@ -9,6 +9,7 @@ public class S_groundTile : MonoBehaviour
     public GameObject[] tilesetWinter = new GameObject[4];
     public GameObject tile_path;
     public GameObject tile_goal;
+    public AudioClip carSound;
 
     [SerializeField] GameObject log;
     [SerializeField] GameObject car;
@@ -352,6 +353,13 @@ public class S_groundTile : MonoBehaviour
 
             tempCar = Instantiate(objToSpawn, new Vector3(location, height, posBase + posForward), Quaternion.Euler(-90, 180 - 180 * Mathf.Clamp01(speed), 0));      //0.85 = y , (speed gives direction, 12 is opposite side of board)
 
+            /*
+            tempCar.AddComponent<AudioSource>();
+            tempCar.GetComponent<AudioSource>().clip = carSound;
+            tempCar.GetComponent<AudioSource>().loop = true;
+            tempCar.GetComponent<AudioSource>().Play();
+            tempCar.GetComponent<AudioSource>().maxDistance = 3;
+            */
             tempCar.GetComponent<Rigidbody>().velocity = Vector3.forward * speed;
             StartCoroutine(WaitAndDestroy(tempCar, 14 / Mathf.Abs(speed)));
         }
