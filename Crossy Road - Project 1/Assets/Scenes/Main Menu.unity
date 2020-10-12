@@ -489,6 +489,7 @@ MonoBehaviour:
   - {fileID: 9008816352817966931, guid: 0e6ac39763ae7a74d9a443fd4fdc017f, type: 3}
   tile_path: {fileID: 5029424292821038654, guid: d5f4e53291a8fcd4baacd04e99a371a0, type: 3}
   tile_goal: {fileID: 5029424292821038654, guid: 01ae62127219e8342967185c2de3f81d, type: 3}
+  carSound: {fileID: 0}
   log: {fileID: 2690098474350116466, guid: e72c1966ecf4ac646a168281de881ee8, type: 3}
   car: {fileID: 8866214213125023123, guid: f04600c5f9aa1854f8a589b76b3cc4ef, type: 3}
 --- !u!4 &297927646
@@ -757,6 +758,7 @@ GameObject:
   - component: {fileID: 686977767}
   - component: {fileID: 686977766}
   - component: {fileID: 686977765}
+  - component: {fileID: 686977768}
   m_Layer: 5
   m_Name: HelpClose
   m_TagString: Untagged
@@ -839,6 +841,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1766257329}
+        m_TargetAssemblyTypeName: S_UIAudio, Assembly-CSharp
+        m_MethodName: ButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &686977766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -877,6 +891,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 686977763}
   m_CullTransparentMesh: 0
+--- !u!114 &686977768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686977763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1766257329}
+          m_TargetAssemblyTypeName: S_UIAudio, Assembly-CSharp
+          m_MethodName: ButtonHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &703981629
 GameObject:
   m_ObjectHideFlags: 0
@@ -2468,6 +2511,7 @@ MonoBehaviour:
   - {fileID: 9008816352817966931, guid: 0e6ac39763ae7a74d9a443fd4fdc017f, type: 3}
   tile_path: {fileID: 5029424292821038654, guid: d5f4e53291a8fcd4baacd04e99a371a0, type: 3}
   tile_goal: {fileID: 5029424292821038654, guid: 01ae62127219e8342967185c2de3f81d, type: 3}
+  carSound: {fileID: 0}
   log: {fileID: 2690098474350116466, guid: e72c1966ecf4ac646a168281de881ee8, type: 3}
   car: {fileID: 8866214213125023123, guid: f04600c5f9aa1854f8a589b76b3cc4ef, type: 3}
 --- !u!4 &1676355754
