@@ -260,6 +260,7 @@ public class GridMovement : MonoBehaviour
         {
             highScore = score;
             PlayerPrefs.SetInt("Highscore", highScore);
+            PlayerPrefs.SetString("HighPlayerName", PlayerPrefs.GetString("PlayerName"));
             PlayerPrefs.Save();
         }
 
