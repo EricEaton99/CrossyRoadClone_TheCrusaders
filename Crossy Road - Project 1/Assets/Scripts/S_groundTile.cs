@@ -69,110 +69,129 @@ public class S_groundTile : MonoBehaviour
             Debug.Log("path is " + path);
             switch (Random.Range(0, 3))
             {
-                case 0:                                     //can create walls
-                    
-                    if (path < 0)       //Ensures that there is always a path forward
-                    {
-                        path = Random.Range(5, 10);
-                        goal = -1;
-                    }
-                    else if (path < 3)
-                    {
-                        goal = path + Random.Range(0, 3);
-                    }
-                    else if (path < 7)
-                    {
-                        goal = path + Random.Range(-3, 3);
-                    }
-                    else if (path < 10)
-                    {
-                        goal = path + Random.Range(-3, 0);
-                    }
-                    else if (path == 10)
-                    {
-                        path = Random.Range(0, 5);
-                        goal = -1;
-                    }
-                    else
-                    {
-                        Debug.Log("int: Path, is out of range");
-                    }
-
+                case 0:
+                    goal = FindNewPath(goal);
                     Debug.Log("goal is " + goal);
 
-
-                    for (int j = 0; j < 10; j++)
-                    {
-                        //Debug.Log(i + ", " + j);
-                        if(((j > path && j < goal) || (j < path && j > goal)) && !(goal < 0))
-                        {
-                            tileGrid[i, j] = Instantiate(tile_path, new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
-                        }
-                        else if (j == path)
-                        {
-                            tileGrid[i, j] = Instantiate(tile_path, new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
-                        }
-                        else if (j == goal)
-                        {
-                            tileGrid[i, j] = Instantiate(tile_goal, new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
-                        }
-                        else if (Random.Range(0, 2) == 0)
-                        {
-                            //print("seasonTileset[season, 0].name = " + seasonTileset[season, 0].name);
-                            tileGrid[i, j] = Instantiate(seasonTileset[season, 0], new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
-                        }
-                        else
-                        {
-                            //print("seasonTileset[season, 1].name = " + seasonTileset[season, 1].name);
-                            tileGrid[i, j] = Instantiate(seasonTileset[season, 1], new Vector3(i + transform.position.x, 0, j), Quaternion.Euler(0 ,Random.Range(0, 3) * 90, 0));
-                        }
-                    }
+                    GenerateField(goal, i, season);
                     break;
                 case 1:
-                    for (int j = 0; j < 10; j++)
-                    {
-                        //Debug.Log(i + ", " + j);
-                        tileGrid[i, j] = Instantiate(seasonTileset[season, 2], new Vector3(i + transform.position.x, -0.05f, j), Quaternion.identity);
-                    }
-                    if (Random.Range(0, 2) == 0)
-                    {
-                        SpawnPreload(log, i + transform.position.x, Random.Range(1, 2.5f));
-                        //StartCoroutine(WaitAndSpawn(log, i + transform.position.x, Random.Range(1, 2.5f)));
-                        path = -1;
-                    }
-                    else
-                    {
-                        SpawnPreload(log, i + transform.position.x, Random.Range(-2.5f, -1));
-                        //StartCoroutine(WaitAndSpawn(log, i + transform.position.x, Random.Range(-2.5f, -1)));
-                        path = 10;
-                    }
+                    GenerateWater(i, season);
                     break;
                 case 2:
-                    for (int j = 0; j < 10; j++)
-                    {
-                        //Debug.Log(i + ", " + j);
-                        tileGrid[i, j] = Instantiate(seasonTileset[season, 3], new Vector3(i + transform.position.x, -0.025f, j), Quaternion.identity);
-                    }
-
-                    if (Random.Range(0, 2) == 0)
-                    {
-                        SpawnPreload(car, i + transform.position.x, Random.Range(1, 2.5f));
-                        //StartCoroutine(WaitAndSpawn(car, i + transform.position.x, Random.Range(1, 2.5f)));
-                        path = -1;
-                    }
-                    else
-                    {
-                        SpawnPreload(car, i + transform.position.x, Random.Range(-2.5f, -1));
-
-                        //StartCoroutine(WaitAndSpawn(car, i + transform.position.x, Random.Range(-2.5f, -1)));
-                        path = 10;
-                    }
+                    GenerateRoad(i, season);
                     break;
                 default:
                     Debug.Log("Tile index does not exist.");
                     break;
             }
             path = goal;        //set path to goal for next row
+        }
+    }
+
+
+    int FindNewPath(int goal)
+    {
+        if (path < 0)       //Ensures that there is always a path forward
+        {
+            path = Random.Range(5, 10);
+            goal = -1;
+        }
+        else if (path < 3)
+        {
+            goal = path + Random.Range(0, 3);
+        }
+        else if (path < 7)
+        {
+            goal = path + Random.Range(-3, 3);
+        }
+        else if (path < 10)
+        {
+            goal = path + Random.Range(-3, 0);
+        }
+        else if (path == 10)
+        {
+            path = Random.Range(0, 5);
+            goal = -1;
+        }
+        else
+        {
+            Debug.Log("int: Path, is out of range");
+        }
+        return (goal);
+    }
+
+    void GenerateField(int goal, int i, int season)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            //Debug.Log(i + ", " + j);
+            if (((j > path && j < goal) || (j < path && j > goal)) && !(goal < 0))
+            {
+                tileGrid[i, j] = Instantiate(tile_path, new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
+            }
+            else if (j == path)
+            {
+                tileGrid[i, j] = Instantiate(tile_path, new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
+            }
+            else if (j == goal)
+            {
+                tileGrid[i, j] = Instantiate(tile_goal, new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
+            }
+            else if (Random.Range(0, 2) == 0)
+            {
+                //print("seasonTileset[season, 0].name = " + seasonTileset[season, 0].name);
+                tileGrid[i, j] = Instantiate(seasonTileset[season, 0], new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
+            }
+            else
+            {
+                //print("seasonTileset[season, 1].name = " + seasonTileset[season, 1].name);
+                tileGrid[i, j] = Instantiate(seasonTileset[season, 1], new Vector3(i + transform.position.x, 0, j), Quaternion.Euler(0, Random.Range(0, 3) * 90, 0));
+            }
+        }
+    }
+
+    void GenerateWater(int i, int season)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            //Debug.Log(i + ", " + j);
+            tileGrid[i, j] = Instantiate(seasonTileset[season, 2], new Vector3(i + transform.position.x, -0.05f, j), Quaternion.identity);
+        }
+        if (Random.Range(0, 2) == 0)
+        {
+            SpawnPreload(log, i + transform.position.x, Random.Range(1, 2.5f));
+            //StartCoroutine(WaitAndSpawn(log, i + transform.position.x, Random.Range(1, 2.5f)));
+            path = -1;
+        }
+        else
+        {
+            SpawnPreload(log, i + transform.position.x, Random.Range(-2.5f, -1));
+            //StartCoroutine(WaitAndSpawn(log, i + transform.position.x, Random.Range(-2.5f, -1)));
+            path = 10;
+        }
+    }
+
+    void GenerateRoad(int i, int season)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            //Debug.Log(i + ", " + j);
+            tileGrid[i, j] = Instantiate(seasonTileset[season, 3], new Vector3(i + transform.position.x, -0.025f, j), Quaternion.identity);
+        }
+
+        if (Random.Range(0, 2) == 0)
+        {
+            SpawnPreload(car, i + transform.position.x, Random.Range(1, 2.5f));
+            //StartCoroutine(WaitAndSpawn(car, i + transform.position.x, Random.Range(1, 2.5f)));
+            path = -1;
+        }
+        else
+        {
+            SpawnPreload(car, i + transform.position.x, Random.Range(-2.5f, -1));
+
+            //StartCoroutine(WaitAndSpawn(car, i + transform.position.x, Random.Range(-2.5f, -1)));
+            path = 10;
         }
     }
 
@@ -194,7 +213,7 @@ public class S_groundTile : MonoBehaviour
                     tileGrid[i, j] = Instantiate(seasonTileset[season, 1], new Vector3(i + transform.position.x, 0, j), Quaternion.Euler(0, Random.Range(0, 3) * 90, 0));
                 }
             }
-            else if (i < 3)
+            else if (i < 5)
             {
                 for (int j = 0; j < 10; j++)
                 {
@@ -222,104 +241,17 @@ public class S_groundTile : MonoBehaviour
                 Debug.Log("path is " + path);
                 switch (Random.Range(0, 3))
                 {
-                    case 0:                                     //can create walls
-
-                        if (path < 0)       //Ensures that there is always a path forward
-                        {
-                            path = Random.Range(5, 10);
-                            goal = -1;
-                        }
-                        else if (path < 3)
-                        {
-                            goal = path + Random.Range(0, 3);
-                        }
-                        else if (path < 7)
-                        {
-                            goal = path + Random.Range(-3, 3);
-                        }
-                        else if (path < 10)
-                        {
-                            goal = path + Random.Range(-3, 0);
-                        }
-                        else if (path == 10)
-                        {
-                            path = Random.Range(0, 5);
-                            goal = -1;
-                        }
-                        else
-                        {
-                            Debug.Log("int: Path, is out of range");
-                        }
-
+                    case 0:
+                        goal = FindNewPath(goal);
                         Debug.Log("goal is " + goal);
 
-
-                        for (int j = 0; j < 10; j++)
-                        {
-                            //Debug.Log(i + ", " + j);
-                            if (((j > path && j < goal) || (j < path && j > goal)) && !(goal < 0))
-                            {
-                                tileGrid[i, j] = Instantiate(tile_path, new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
-                            }
-                            else if (j == path)
-                            {
-                                tileGrid[i, j] = Instantiate(tile_path, new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
-                            }
-                            else if (j == goal)
-                            {
-                                tileGrid[i, j] = Instantiate(tile_goal, new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
-                            }
-                            else if (Random.Range(0, 2) == 0)
-                            {
-                                //print("seasonTileset[season, 0].name = " + seasonTileset[season, 0].name);
-                                tileGrid[i, j] = Instantiate(seasonTileset[season, 0], new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
-                            }
-                            else
-                            {
-                                //print("seasonTileset[season, 1].name = " + seasonTileset[season, 1].name);
-                                tileGrid[i, j] = Instantiate(seasonTileset[season, 1], new Vector3(i + transform.position.x, 0, j), Quaternion.Euler(0, Random.Range(0, 3) * 90, 0));
-                            }
-                        }
+                        GenerateField(goal, i, season);
                         break;
                     case 1:
-                        for (int j = 0; j < 10; j++)
-                        {
-                            //Debug.Log(i + ", " + j);
-                            tileGrid[i, j] = Instantiate(seasonTileset[season, 2], new Vector3(i + transform.position.x, -0.05f, j), Quaternion.identity);
-                        }
-                        if (Random.Range(0, 2) == 0)
-                        {
-                            SpawnPreload(log, i + transform.position.x, Random.Range(1, 2.5f));
-                            //StartCoroutine(WaitAndSpawn(log, i + transform.position.x, Random.Range(1, 2.5f)));
-                            path = -1;
-                        }
-                        else
-                        {
-                            SpawnPreload(log, i + transform.position.x, Random.Range(-2.5f, -1));
-                            //StartCoroutine(WaitAndSpawn(log, i + transform.position.x, Random.Range(-2.5f, -1)));
-                            path = 10;
-                        }
+                        GenerateWater(i, season);
                         break;
                     case 2:
-                        for (int j = 0; j < 10; j++)
-                        {
-                            //Debug.Log(i + ", " + j);
-                            tileGrid[i, j] = Instantiate(seasonTileset[season, 3], new Vector3(i + transform.position.x, -0.025f, j), Quaternion.identity);
-                        }
-
-                        if (Random.Range(0, 2) == 0)
-                        {
-                            SpawnPreload(car, i + transform.position.x, Random.Range(1, 2.5f));
-                            //StartCoroutine(WaitAndSpawn(car, i + transform.position.x, Random.Range(1, 2.5f)));
-                            path = -1;
-                        }
-                        else
-                        {
-                            SpawnPreload(car, i + transform.position.x, Random.Range(-2.5f, -1));
-
-                            //StartCoroutine(WaitAndSpawn(car, i + transform.position.x, Random.Range(-2.5f, -1)));
-                            path = 10;
-                        }
+                        GenerateRoad(i, season);
                         break;
                     default:
                         Debug.Log("Tile index does not exist.");
@@ -331,58 +263,49 @@ public class S_groundTile : MonoBehaviour
     }
 
 
-    private void SpawnPreload(GameObject objToSpawn, float location, float speed)
+    private void SpawnPreload(GameObject objToSpawn, float rowLocation, float speed)
     {
         GameObject tempCar;
-        float height;
+        float posBase = 12 - 14 * Mathf.Clamp01(speed);
         float posForward = 0;
 
         if (objToSpawn == car)
         {
-            height = 0.85f;
+            for (int i = 0; i < 4; i++)
+            {
+                posForward += 2.2f / Mathf.Abs(speed) * Random.Range(1, 4) * speed;
+                float startingPoint = posBase + posForward;
+                tempCar = SpawnCarAt(rowLocation, startingPoint, speed);
+            }
         }
-        else
+        else if (objToSpawn == log)
         {
-            height = 0.6f;
+            for (int i = 0; i < 4; i++)
+            {
+                posForward += 2.2f / Mathf.Abs(speed) * Random.Range(1, 4) * speed;
+                float startingPoint = posBase + posForward;
+                tempCar = SpawnLogAt(rowLocation, startingPoint, speed);
+            }
         }
-        for (int i = 0; i < 4; i++)
-        {
-            float posBase = 12 - 14 * Mathf.Clamp01(speed);
-            posForward += 2.2f / Mathf.Abs(speed) * Random.Range(1, 4) * speed;
-
-
-            tempCar = Instantiate(objToSpawn, new Vector3(location, height, posBase + posForward), Quaternion.Euler(-90, 180 - 180 * Mathf.Clamp01(speed), 0));      //0.85 = y , (speed gives direction, 12 is opposite side of board)
-
-            /*
-            tempCar.AddComponent<AudioSource>();
-            tempCar.GetComponent<AudioSource>().clip = carSound;
-            tempCar.GetComponent<AudioSource>().loop = true;
-            tempCar.GetComponent<AudioSource>().Play();
-            tempCar.GetComponent<AudioSource>().maxDistance = 3;
-            */
-            tempCar.GetComponent<Rigidbody>().velocity = Vector3.forward * speed;
-            StartCoroutine(WaitAndDestroy(tempCar, 14 / Mathf.Abs(speed)));
-        }
-
-        StartCoroutine(WaitAndSpawn(objToSpawn, location, speed));
+        
+        StartCoroutine(WaitAndSpawn(objToSpawn, rowLocation, speed));
     }
 
-    IEnumerator WaitAndSpawn(GameObject objToSpawn, float location, float speed)
+    IEnumerator WaitAndSpawn(GameObject objToSpawn, float rowLocation, float speed)
     {
-        yield return new WaitForSeconds(2.2f / Mathf.Abs(speed) * Random.Range(1, 4));
+        yield return new WaitForSeconds(2.2f / Mathf.Abs(speed) * Random.Range(1.6f, 4.1f));
         GameObject tempCar;
         if (objToSpawn == car)
         {
-            tempCar = Instantiate(objToSpawn, new Vector3(location, 0.85f, 12 - 14 * Mathf.Clamp01(speed)), Quaternion.Euler(-90, 180 - 180 * Mathf.Clamp01(speed), 0));      //0.85 = y
+            float startingPoint = 12 - 14 * Mathf.Clamp01(speed);
+            tempCar = SpawnCarAt(rowLocation, startingPoint, speed);
         }
         else
         {
-            tempCar = Instantiate(objToSpawn, new Vector3(location, 0.6f, 12 - 14 * Mathf.Clamp01(speed)), Quaternion.Euler(-90, 180 - 180 * Mathf.Clamp01(speed), 0));      //0.6 = y
+            float startingPoint = 12 - 14 * Mathf.Clamp01(speed);
+            tempCar = SpawnLogAt(rowLocation, startingPoint, speed);
         }
-
-        tempCar.GetComponent<Rigidbody>().velocity = Vector3.forward * speed;
-        StartCoroutine(WaitAndDestroy(tempCar, 14 / Mathf.Abs(speed)));
-        StartCoroutine(WaitAndSpawn(objToSpawn, location, speed));
+        StartCoroutine(WaitAndSpawn(objToSpawn, rowLocation, speed));
     }
 
     IEnumerator WaitAndDestroy(GameObject objToDestroy, float waitTime)
@@ -391,6 +314,29 @@ public class S_groundTile : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         objBacklog.Remove(objToDestroy);
         Destroy(objToDestroy);
+    }
+
+
+    GameObject SpawnCarAt(float rowLocation, float startingPoint, float speed)
+    {
+        GameObject tempCar = Instantiate(car, new Vector3(rowLocation, 0.85f, startingPoint), Quaternion.Euler(-90, 180 - 180 * Mathf.Clamp01(speed), 0));      //0.85 = y
+
+        tempCar.GetComponent<Rigidbody>().velocity = Vector3.forward * speed;
+        tempCar.GetComponent<AudioSource>().pitch = Random.Range(1.49f, 2.01f);
+
+        StartCoroutine(WaitAndDestroy(tempCar, 14 / Mathf.Abs(speed)));
+        return tempCar;
+    }
+
+
+    GameObject SpawnLogAt(float rowLocation, float startingPoint, float speed)
+    {
+        GameObject tempLog = Instantiate(log, new Vector3(rowLocation, 0.6f, startingPoint), Quaternion.Euler(-90, 180 - 180 * Mathf.Clamp01(speed), 0));      //0.6 = y
+
+        tempLog.GetComponent<Rigidbody>().velocity = Vector3.forward * speed;
+
+        StartCoroutine(WaitAndDestroy(tempLog, 14 / Mathf.Abs(speed)));
+        return tempLog;
     }
 
 }
