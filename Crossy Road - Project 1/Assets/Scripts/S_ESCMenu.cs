@@ -21,8 +21,7 @@ public class S_ESCMenu : MonoBehaviour
 
         if (toggle)
             OnEPress();
-        else
-            OnEQuit();
+            
     }
 
     public void OnEPress()

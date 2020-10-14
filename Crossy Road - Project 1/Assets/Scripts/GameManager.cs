@@ -81,6 +81,8 @@ public class GameManager : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         highscore.text = PlayerPrefs.GetString("PlayerName").ToString() + ": " + PlayerPrefs.GetInt("Highscore").ToString();
+        PlayerPrefs.DeleteKey("unlocks"); //delete character save data when DEL cheat code is used
+        Debug.Log("Characters and highscore deleted.");
     }
 }
 

@@ -25,6 +25,8 @@ public class GridMovement : MonoBehaviour
 
     bool onLog;
 
+    int[] scoreArray = new int[31];
+
     private void Start()
     {
         Time.timeScale = 1;
@@ -39,6 +41,10 @@ public class GridMovement : MonoBehaviour
         highScore = PlayerPrefs.GetInt("Highscore");
 
         gManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+
+        SetUpScoreArray();
+
+        PlayerPrefs.GetInt("unlocks");
     }
 
     void Update()
@@ -105,6 +111,18 @@ public class GridMovement : MonoBehaviour
         if (transform.position.z >= 10 || transform.position.z <= -1) //when the player is on out-of-bounds logs
         {
             Die();
+        }
+
+        for (int x = 0; x < scoreArray.Length; x++)
+        {
+            if (score >= scoreArray[x])
+            {
+                if (x > PlayerPrefs.GetInt("unlocks")) //only unlock if it's a locked character
+                {
+                    UnlockACharacter(x);
+                    Debug.Log("Unlocked a character at " + scoreArray[x]);
+                }
+            }
         }
     }
 
@@ -193,22 +211,16 @@ public class GridMovement : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Car"))
         {
-            if (!isInvincible)
-            {
-                Debug.Log("Death by traffic");
-                Die();
-            }
+            Debug.Log("Death by traffic");
+            Die();
         }
         else if (other.gameObject.CompareTag("Water"))
         {
-            if (!isInvincible)
-            {
-                inWater = true;
+            inWater = true;
 
-                if (transform.root == transform) //if player is not on a log
-                {
-                    Invoke("Die", .05f);
-                }
+            if (transform.root == transform) //if player is not on a log
+            {
+                Invoke("Die", .05f);
             }
         }
         else if (other.gameObject.CompareTag("Exit")) //ending platform
@@ -256,18 +268,21 @@ public class GridMovement : MonoBehaviour
 
     void Die()
     {
-        if (score >= highScore) //update high score after death
+        if (!isInvincible)
         {
-            highScore = score;
-            PlayerPrefs.SetInt("Highscore", highScore);
-            PlayerPrefs.SetString("HighPlayerName", PlayerPrefs.GetString("PlayerName"));
-            PlayerPrefs.Save();
+            if (score >= highScore) //update high score after death
+            {
+                highScore = score;
+                PlayerPrefs.SetInt("Highscore", highScore);
+                PlayerPrefs.SetString("HighPlayerName", PlayerPrefs.GetString("PlayerName"));
+                PlayerPrefs.Save();
+            }
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            SceneManager.LoadScene("Main Menu");
         }
-
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-
-        SceneManager.LoadScene("Main Menu");
     }
 
     void ResetPositions()
@@ -283,4 +298,34 @@ public class GridMovement : MonoBehaviour
         ResetPositions();
     }
 
+    void SetUpScoreArray()
+    {
+        int unlockScore = 0;
+        for (int x = 0; x < scoreArray.Length; x++)
+        {
+            if (x < 20) //5, 10, 15, 20... (100)
+            {
+                unlockScore += 5;
+            }
+            else if (x < 25) //110, 120, 130, 140, (150)
+            {
+                unlockScore += 10;
+            }
+            else if (x < 30) //170, 190, 210, 230, (250)
+            {
+                unlockScore += 20;
+            }
+            else //x = 30, final unlockScore of 300
+            {
+                unlockScore += 50;
+            }
+            scoreArray[x] = unlockScore;
+        }
+        scoreArray[0] = 0;
+    }
+
+    void UnlockACharacter(int index)
+    {
+        PlayerPrefs.SetInt("unlocks", index);
+    }    
 }
