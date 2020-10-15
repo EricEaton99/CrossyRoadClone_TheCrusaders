@@ -25,7 +25,7 @@ public class GridMovement : MonoBehaviour
 
     bool onLog;
 
-    int[] scoreArray = new int[31];
+    int[] scoreArray = new int[23];
 
     private void Start()
     {
@@ -45,6 +45,7 @@ public class GridMovement : MonoBehaviour
         SetUpScoreArray();
 
         PlayerPrefs.GetInt("unlocks");
+        Debug.Log("Next character: " + scoreArray[PlayerPrefs.GetInt("unlocks") + 1]);
     }
 
     void Update()
@@ -300,28 +301,24 @@ public class GridMovement : MonoBehaviour
 
     void SetUpScoreArray()
     {
-        int unlockScore = 0;
-        for (int x = 0; x < scoreArray.Length; x++)
+        int unlockScore = 10;
+        for (int x = 1; x < scoreArray.Length; x++)
         {
-            if (x < 20) //5, 10, 15, 20... (100)
-            {
-                unlockScore += 5;
-            }
-            else if (x < 25) //110, 120, 130, 140, (150)
+            if (x < 10) //0, 20, 30, 40... (100)
             {
                 unlockScore += 10;
             }
-            else if (x < 30) //170, 190, 210, 230, (250)
+            else if (x < 20) //115, 130, 145... (250)
             {
-                unlockScore += 20;
+                unlockScore += 15;
             }
-            else //x = 30, final unlockScore of 300
+            else //300, 350, (400)
             {
                 unlockScore += 50;
             }
             scoreArray[x] = unlockScore;
         }
-        scoreArray[0] = 0;
+        Debug.Log(scoreArray[22]);
     }
 
     void UnlockACharacter(int index)

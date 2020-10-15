@@ -11,7 +11,7 @@ public class CharacterUnlocking : MonoBehaviour
 
     void Start()
     {
-        characterBools = new bool[31];
+        characterBools = new bool[23];
         for (int a = 0; a < characterObjects.Length; a++) //lock everything
         {
             characterBools[a] = false;
