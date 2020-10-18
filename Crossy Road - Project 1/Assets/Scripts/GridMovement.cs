@@ -35,7 +35,7 @@ public class GridMovement : MonoBehaviour
         isMoving = false;
         onLog = false;
 
-        minVerticalValue = -2;
+        minVerticalValue = 0;
 
         //setting up highscore prefs
         highScore = PlayerPrefs.GetInt("Highscore");

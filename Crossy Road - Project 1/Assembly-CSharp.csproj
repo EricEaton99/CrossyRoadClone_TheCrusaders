@@ -62,8 +62,9 @@
     <Compile Include="Assets/Scripts/GridMovement.cs" />
     <Compile Include="Assets/Scripts/S_ESCMenu.cs" />
     <Compile Include="Assets/Scripts/S_UIAudio.cs" />
-    <Compile Include="Assets/Scripts/CameraFollow.cs" />
     <Compile Include="Assets/Scripts/CharacterUnlocking.cs" />
+    <Compile Include="Assets/Scripts/CameraFollow.cs" />
+    <Compile Include="Assets/Scripts/S_Warning.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets/SimplePixelUI/fonts/Font2/license.txt" />
