@@ -23,12 +23,16 @@ MonoBehaviour:
   m_Title: Game
   m_RootView: {fileID: 8}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_MinSize: {x: 875, y: 542}
 =======
   m_Title: Console
   m_RootView: {fileID: 5}
   m_MinSize: {x: 875, y: 371}
 >>>>>>> Stashed changes
+=======
+  m_MinSize: {x: 875, y: 521}
+>>>>>>> parent of c8eb2dd6... Audio Update
 =======
   m_MinSize: {x: 875, y: 521}
 >>>>>>> parent of c8eb2dd6... Audio Update
@@ -83,6 +87,7 @@ MonoBehaviour:
     width: 552
     height: 547
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_MinSize: {x: 201, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
 =======
@@ -92,6 +97,10 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
 >>>>>>> Stashed changes
+=======
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+>>>>>>> parent of c8eb2dd6... Audio Update
 =======
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
@@ -225,11 +234,15 @@ MonoBehaviour:
     width: 1600
     height: 941
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     width: 1440
     height: 808
 >>>>>>> Stashed changes
   m_MinSize: {x: 875, y: 300}
+=======
+  m_MinSize: {x: 875, y: 521}
+>>>>>>> parent of c8eb2dd6... Audio Update
 =======
   m_MinSize: {x: 875, y: 521}
 >>>>>>> parent of c8eb2dd6... Audio Update
@@ -454,6 +467,7 @@ MonoBehaviour:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< Updated upstream
       m_SelectedIDs: 
       m_LastClickedID: 0
@@ -463,6 +477,11 @@ MonoBehaviour:
       m_LastClickedID: 64144
       m_ExpandedIDs: bc80e4ff6cfa000078fa000096fa0000b2fa0000c0fa0000d2fa000000fb00000afb000020fb0000
 >>>>>>> Stashed changes
+=======
+      m_SelectedIDs: b29c0000
+      m_LastClickedID: 40114
+      m_ExpandedIDs: 3672f1ffcef9f2ffecf9f2ff0afaf2ff2cfdf2ff4afdf2ff68fdf2ffbc00f3ff481df5ff74bef5ff622ff6ff62fbffffc8820000b683000000840000a6890000948a0000de8a0000
+>>>>>>> parent of c8eb2dd6... Audio Update
 =======
       m_SelectedIDs: b29c0000
       m_LastClickedID: 40114
@@ -582,11 +601,15 @@ MonoBehaviour:
     m_SelectedIDs: 04ca9a3b
     m_LastClickedID: 1000000004
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     m_ExpandedIDs: 00000000943e0000963e0000983e00009a3e00009c3e00009e3e0000a03e0000a23e0000a43e0000
 =======
     m_ExpandedIDs: ffffffff00000000ec610000ee610000f0610000f2610000f4610000f6610000f8610000fa610000fc610000
 >>>>>>> Stashed changes
+=======
+    m_ExpandedIDs: 000000004a3e00004c3e00004e3e0000503e0000523e0000543e0000563e0000583e00005a3e00005c3e00005e3e0000
+>>>>>>> parent of c8eb2dd6... Audio Update
 =======
     m_ExpandedIDs: 000000004a3e00004c3e00004e3e0000503e0000523e0000543e0000563e0000583e00005a3e00005c3e00005e3e0000
 >>>>>>> parent of c8eb2dd6... Audio Update
@@ -615,8 +638,12 @@ MonoBehaviour:
       m_ResourceFile: 
   m_AssetTreeState:
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     scrollPos: {x: 0, y: 180}
+=======
+    scrollPos: {x: 0, y: 138}
+>>>>>>> parent of c8eb2dd6... Audio Update
 =======
     scrollPos: {x: 0, y: 138}
 >>>>>>> parent of c8eb2dd6... Audio Update
@@ -625,6 +652,7 @@ MonoBehaviour:
     m_ExpandedIDs: ffffffff000000004a3e00004c3e00004e3e0000503e0000543e0000563e0000583e00005c3e00005e3e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
       m_Name: Water
       m_OriginalName: Water
@@ -642,6 +670,10 @@ MonoBehaviour:
       m_Name: 
       m_OriginalName: 
 >>>>>>> parent of c8eb2dd6... Audio Update
+=======
+      m_Name: 
+      m_OriginalName: 
+>>>>>>> parent of c8eb2dd6... Audio Update
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
@@ -649,11 +681,15 @@ MonoBehaviour:
         width: 0
         height: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< Updated upstream
       m_UserData: 13330
 =======
       m_UserData: 31656
 >>>>>>> Stashed changes
+=======
+      m_UserData: 0
+>>>>>>> parent of c8eb2dd6... Audio Update
 =======
       m_UserData: 0
 >>>>>>> parent of c8eb2dd6... Audio Update
@@ -827,6 +863,7 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_Position:
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     m_Target: {x: 1, y: 1.5, z: 5}
     speed: 2
@@ -836,6 +873,11 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0}
 >>>>>>> Stashed changes
+=======
+    m_Target: {x: 14.688485, y: -3.0813046, z: 4.72285}
+    speed: 2
+    m_Value: {x: 14.688485, y: -3.0813046, z: 4.72285}
+>>>>>>> parent of c8eb2dd6... Audio Update
 =======
     m_Target: {x: 14.688485, y: -3.0813046, z: 4.72285}
     speed: 2
@@ -888,8 +930,12 @@ MonoBehaviour:
     m_gridOpacity: 0.5
   m_Rotation:
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     m_Target: {x: 0.42766935, y: 0.20569804, z: -0.10058175, w: 0.8745845}
+=======
+    m_Target: {x: 0.34625652, y: 0.57055056, z: -0.28754953, w: 0.68710834}
+>>>>>>> parent of c8eb2dd6... Audio Update
 =======
     m_Target: {x: 0.34625652, y: 0.57055056, z: -0.28754953, w: 0.68710834}
 >>>>>>> parent of c8eb2dd6... Audio Update
@@ -898,6 +944,7 @@ MonoBehaviour:
   m_Size:
     m_Target: 6.9115725
     speed: 2
+<<<<<<< HEAD
 <<<<<<< HEAD
     m_Value: 1.3592852
 =======
@@ -909,6 +956,9 @@ MonoBehaviour:
     speed: 2
     m_Value: 1.5220014
 >>>>>>> Stashed changes
+=======
+    m_Value: 6.9115725
+>>>>>>> parent of c8eb2dd6... Audio Update
 =======
     m_Value: 6.9115725
 >>>>>>> parent of c8eb2dd6... Audio Update
