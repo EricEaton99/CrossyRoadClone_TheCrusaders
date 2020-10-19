@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public Text highscore;
     public InputField name;
     public Text playerNameText;
+    public GameObject leaderboardPanel;
     
 
 
@@ -60,6 +61,15 @@ public class GameManager : MonoBehaviour
     {
         helpPanel.SetActive(false);
         print("The Help (close) button was clicked");
+    }
+    public void OnGlobalOpen()
+    {
+        leaderboardPanel.SetActive(true);
+
+    }
+    public void OnGlobalClose()
+    {
+        leaderboardPanel.SetActive(false);
     }
     public void OnClickQuit()
     {
