@@ -64,14 +64,14 @@ public class S_ScoreTransfer : MonoBehaviour
         string[] entries = textStream.Split(new char[] { '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
         highscoresList = new Highscore[entries.Length];
 
-        for (int i = 0; i < entries.Length; i++)
+        for (int i = 0; i < 10; i++)
         {
             string[] entryInfo = entries[i].Split(new char[] { '|' });
             string username = entryInfo[0];
             int score = int.Parse(entryInfo[1]);
             highscoresList[i] = new Highscore(username, score);
             print(highscoresList[i].username + ": " + highscoresList[i].score);
-            textBox.text = highscoresList[0].username + ": " + highscoresList[0].score + "\n";
+            textBox.text += highscoresList[i].username + ": " + highscoresList[i].score + "\n";
         }
 
 
