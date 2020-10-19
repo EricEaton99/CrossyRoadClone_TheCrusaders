@@ -13,6 +13,9 @@ public class S_groundTile : MonoBehaviour
 
     [SerializeField] GameObject log;
     [SerializeField] GameObject car;
+    [SerializeField] GameObject trainEngine;
+    [SerializeField] GameObject trainCar;
+    [SerializeField] GameObject trainFlat;
 
     GameObject[,] seasonTileset = new GameObject[3, 4];
     GameObject[,] tileGrid = new GameObject[10, 10];
@@ -60,18 +63,18 @@ public class S_groundTile : MonoBehaviour
     public void Shuffle()
     {
         Instantiate(tile_path, new Vector3(transform.position.x, 0, -1), Quaternion.identity);
-        Debug.LogError("NewTile");
+        //Debug.LogError("NewTile");
         int goal = 5;
         int season = Random.Range(0, 3);
-        print("Season = " + season);
+        //print("Season = " + season);
         for (int i = 0; i < 10; i++)
         {
-            Debug.Log("path is " + path);
-            switch (Random.Range(0, 3))
+            //Debug.Log("path is " + path);
+            switch (Random.Range(0, 4))
             {
                 case 0:
                     goal = FindNewPath(goal);
-                    Debug.Log("goal is " + goal);
+                    //Debug.Log("goal is " + goal);
 
                     GenerateField(goal, i, season);
                     break;
@@ -81,8 +84,11 @@ public class S_groundTile : MonoBehaviour
                 case 2:
                     GenerateRoad(i, season);
                     break;
+                case 3:
+                    GenerateTracks(i, season);
+                    break;
                 default:
-                    Debug.Log("Tile index does not exist.");
+                    //Debug.Log("Tile index does not exist.");
                     break;
             }
             path = goal;        //set path to goal for next row
@@ -116,7 +122,7 @@ public class S_groundTile : MonoBehaviour
         }
         else
         {
-            Debug.Log("int: Path, is out of range");
+            //Debug.Log("int: Path, is out of range");
         }
         return (goal);
     }
@@ -195,14 +201,37 @@ public class S_groundTile : MonoBehaviour
         }
     }
 
+    void GenerateTracks(int i, int season)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            //Debug.Log(i + ", " + j);
+            tileGrid[i, j] = Instantiate(seasonTileset[season, 3], new Vector3(i + transform.position.x, -0.025f, j), Quaternion.identity);
+        }
+
+        if (Random.Range(0, 2) == 0)
+        {
+            SpawnPreload(trainEngine, i + transform.position.x, Random.Range(1, 2.5f));
+            //StartCoroutine(WaitAndSpawn(car, i + transform.position.x, Random.Range(1, 2.5f)));
+            path = -1;
+        }
+        else
+        {
+            SpawnPreload(trainEngine, i + transform.position.x, Random.Range(-2.5f, -1));
+
+            //StartCoroutine(WaitAndSpawn(car, i + transform.position.x, Random.Range(-2.5f, -1)));
+            path = 10;
+        }
+    }
+
 
     public void OnBeginPlayPath()
     {
         Instantiate(tile_path, new Vector3(transform.position.x, 0, -1), Quaternion.identity);
-        Debug.LogError("NewTile");
+        //Debug.LogError("NewTile");
         int goal = 5;
         int season = Random.Range(0, 3);
-        print("Season = " + season);
+        //print("Season = " + season);
         for (int i = 0; i < 10; i++)
         {
             if (i < 1)
@@ -238,12 +267,12 @@ public class S_groundTile : MonoBehaviour
             }
             else
             {
-                Debug.Log("path is " + path);
+                //Debug.Log("path is " + path);
                 switch (Random.Range(0, 3))
                 {
                     case 0:
                         goal = FindNewPath(goal);
-                        Debug.Log("goal is " + goal);
+                        //Debug.Log("goal is " + goal);
 
                         GenerateField(goal, i, season);
                         break;
@@ -253,8 +282,11 @@ public class S_groundTile : MonoBehaviour
                     case 2:
                         GenerateRoad(i, season);
                         break;
+                    case 3:
+                        Debug.Log("Train");
+                        break;
                     default:
-                        Debug.Log("Tile index does not exist.");
+                        //Debug.Log("Tile index does not exist.");
                         break;
                 }
                 path = goal;        //set path to goal for next row
@@ -287,7 +319,16 @@ public class S_groundTile : MonoBehaviour
                 tempCar = SpawnLogAt(rowLocation, startingPoint, speed);
             }
         }
-        
+        else if (objToSpawn == trainEngine)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                posForward += 2.2f / Mathf.Abs(speed) * Random.Range(1, 4) * speed;
+                float startingPoint = posBase + posForward;
+                tempCar = SpawnLogAt(rowLocation, startingPoint, speed);
+            }
+        }
+
         StartCoroutine(WaitAndSpawn(objToSpawn, rowLocation, speed));
     }
 
@@ -300,10 +341,15 @@ public class S_groundTile : MonoBehaviour
             float startingPoint = 12 - 14 * Mathf.Clamp01(speed);
             tempCar = SpawnCarAt(rowLocation, startingPoint, speed);
         }
-        else
+        else if (objToSpawn == log)
         {
             float startingPoint = 12 - 14 * Mathf.Clamp01(speed);
             tempCar = SpawnLogAt(rowLocation, startingPoint, speed);
+        }
+        else if (objToSpawn == trainEngine)
+        {
+            float startingPoint = 12 - 14 * Mathf.Clamp01(speed);
+            tempCar = SpawnTrainEngineAt(rowLocation, startingPoint, speed);
         }
         StartCoroutine(WaitAndSpawn(objToSpawn, rowLocation, speed));
     }
@@ -339,4 +385,13 @@ public class S_groundTile : MonoBehaviour
         return tempLog;
     }
 
+    GameObject SpawnTrainEngineAt(float rowLocation, float startingPoint, float speed)
+    {
+        GameObject tempEngine = Instantiate(trainEngine, new Vector3(rowLocation, 0.95f, startingPoint), Quaternion.Euler(-90, 180 - 180 * Mathf.Clamp01(speed), 0));      //0.6 = y
+
+        tempEngine.GetComponent<Rigidbody>().velocity = Vector3.forward * speed;
+
+        StartCoroutine(WaitAndDestroy(tempEngine, 14 / Mathf.Abs(speed)));
+        return tempEngine;
+    }
 }
