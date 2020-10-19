@@ -135,15 +135,15 @@ public class S_groundTile : MonoBehaviour
             //Debug.Log(i + ", " + j);
             if (((j > path && j < goal) || (j < path && j > goal)) && !(goal < 0))
             {
-                tileGrid[i, j] = Instantiate(tile_path, new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
+                tileGrid[i, j] = Instantiate(seasonTileset[season, 0], new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
             }
             else if (j == path)
             {
-                tileGrid[i, j] = Instantiate(tile_path, new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
+                tileGrid[i, j] = Instantiate(seasonTileset[season, 0], new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
             }
             else if (j == goal)
             {
-                tileGrid[i, j] = Instantiate(tile_goal, new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
+                tileGrid[i, j] = Instantiate(seasonTileset[season, 0], new Vector3(i + transform.position.x, 0, j), Quaternion.identity);
             }
             else if (Random.Range(0, 2) == 0)
             {
