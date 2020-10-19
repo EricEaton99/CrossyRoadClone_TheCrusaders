@@ -1431,11 +1431,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4670757606563367816}
   - component: {fileID: 6773712572942340215}
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   - component: {fileID: 4274499134793835549}
 =======
   - component: {fileID: 3312775306126691008}
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of c8eb2dd6... Audio Update
   m_Layer: 0
   m_Name: TrainFlat
   m_TagString: Log
@@ -1483,6 +1486,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 118
   m_CollisionDetection: 0
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 --- !u!82 &4274499134793835549
 AudioSource:
@@ -1593,6 +1597,8 @@ BoxCollider:
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of c8eb2dd6... Audio Update
 --- !u!1 &4670757606589277916
 GameObject:
   m_ObjectHideFlags: 0
