@@ -2343,7 +2343,6 @@ AudioListener:
   m_GameObject: {fileID: 1973018817}
   m_Enabled: 1
 <<<<<<< HEAD
-<<<<<<< HEAD
 <<<<<<< Updated upstream
 --- !u!82 &1973018825
 AudioSource:
@@ -2452,8 +2451,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 >>>>>>> Stashed changes
-=======
->>>>>>> parent of c8eb2dd6... Audio Update
 =======
 >>>>>>> parent of c8eb2dd6... Audio Update
 --- !u!1 &2000498401
