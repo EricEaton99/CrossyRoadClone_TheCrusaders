@@ -520,6 +520,7 @@ MonoBehaviour:
   - {fileID: 5029424292821038654, guid: ffde6bfc57137f945afe42a69817f8b6, type: 3}
   - {fileID: 8900246078353098708, guid: 89cd970ef4ea1004689b62ca7ac3d5c2, type: 3}
   - {fileID: 9008816352817966931, guid: 0e6ac39763ae7a74d9a443fd4fdc017f, type: 3}
+  trainTracks: {fileID: 6512000273200548820, guid: 42c77a3f170b8fc4fa328221ba3291ec, type: 3}
   tile_path: {fileID: 5029424292821038654, guid: d5f4e53291a8fcd4baacd04e99a371a0, type: 3}
   tile_goal: {fileID: 5029424292821038654, guid: 01ae62127219e8342967185c2de3f81d, type: 3}
   carSound: {fileID: 8300000, guid: 963d365f90e1f0646891c3b22ba70a39, type: 3}
@@ -586,6 +587,7 @@ MonoBehaviour:
   - {fileID: 5029424292821038654, guid: ffde6bfc57137f945afe42a69817f8b6, type: 3}
   - {fileID: 8900246078353098708, guid: 89cd970ef4ea1004689b62ca7ac3d5c2, type: 3}
   - {fileID: 9008816352817966931, guid: 0e6ac39763ae7a74d9a443fd4fdc017f, type: 3}
+  trainTracks: {fileID: 6512000273200548820, guid: 42c77a3f170b8fc4fa328221ba3291ec, type: 3}
   tile_path: {fileID: 5029424292821038654, guid: d5f4e53291a8fcd4baacd04e99a371a0, type: 3}
   tile_goal: {fileID: 5029424292821038654, guid: 01ae62127219e8342967185c2de3f81d, type: 3}
   carSound: {fileID: 8300000, guid: 963d365f90e1f0646891c3b22ba70a39, type: 3}
@@ -2326,6 +2328,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  trainTracks: {fileID: 0}
   tile_path: {fileID: 5029424292821038654, guid: d5f4e53291a8fcd4baacd04e99a371a0, type: 3}
   tile_goal: {fileID: 5029424292821038654, guid: 01ae62127219e8342967185c2de3f81d, type: 3}
   carSound: {fileID: 0}

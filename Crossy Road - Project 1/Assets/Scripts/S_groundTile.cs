@@ -7,6 +7,7 @@ public class S_groundTile : MonoBehaviour
     public GameObject[] tilesetSummer = new GameObject[4];
     public GameObject[] tilesetFall = new GameObject[4];
     public GameObject[] tilesetWinter = new GameObject[4];
+    [SerializeField] GameObject trainTracks;
     public GameObject tile_path;
     public GameObject tile_goal;
     public AudioClip carSound;
@@ -206,7 +207,7 @@ public class S_groundTile : MonoBehaviour
         for (int j = 0; j < 10; j++)
         {
             //Debug.Log(i + ", " + j);
-            tileGrid[i, j] = Instantiate(seasonTileset[season, 3], new Vector3(i + transform.position.x, -0.025f, j), Quaternion.identity);
+            tileGrid[i, j] = Instantiate(trainTracks, new Vector3(i + transform.position.x, -0.025f, j), Quaternion.identity);
         }
 
         if (Random.Range(0, 2) == 0)
@@ -319,39 +320,64 @@ public class S_groundTile : MonoBehaviour
                 tempCar = SpawnLogAt(rowLocation, startingPoint, speed);
             }
         }
-        else if (objToSpawn == trainEngine)
-        {
-            for (int i = 0; i < 4; i++)
-            {
-                posForward += 2.2f / Mathf.Abs(speed) * Random.Range(1, 4) * speed;
-                float startingPoint = posBase + posForward;
-                tempCar = SpawnLogAt(rowLocation, startingPoint, speed);
-            }
-        }
-
-        StartCoroutine(WaitAndSpawn(objToSpawn, rowLocation, speed));
+        float waitTime = 2.2f / Mathf.Abs(speed) * Random.Range(1.6f, 4.1f);
+        StartCoroutine(WaitAndSpawn(objToSpawn, rowLocation, speed, waitTime));
     }
 
-    IEnumerator WaitAndSpawn(GameObject objToSpawn, float rowLocation, float speed)
+    IEnumerator WaitAndSpawn(GameObject objToSpawn, float rowLocation, float speed, float waitTime)
     {
-        yield return new WaitForSeconds(2.2f / Mathf.Abs(speed) * Random.Range(1.6f, 4.1f));
+        
+        yield return new WaitForSeconds(waitTime);
         GameObject tempCar;
         if (objToSpawn == car)
         {
             float startingPoint = 12 - 14 * Mathf.Clamp01(speed);
             tempCar = SpawnCarAt(rowLocation, startingPoint, speed);
+            waitTime = 2.2f / Mathf.Abs(speed) * Random.Range(1.6f, 4.1f);
         }
         else if (objToSpawn == log)
         {
             float startingPoint = 12 - 14 * Mathf.Clamp01(speed);
             tempCar = SpawnLogAt(rowLocation, startingPoint, speed);
+            waitTime = 2.2f / Mathf.Abs(speed) * Random.Range(1.6f, 4.1f);
         }
         else if (objToSpawn == trainEngine)
         {
             float startingPoint = 12 - 14 * Mathf.Clamp01(speed);
-            tempCar = SpawnTrainEngineAt(rowLocation, startingPoint, speed);
+            tempCar = SpawnTrainComponentAt(objToSpawn, rowLocation, startingPoint, speed);
+            waitTime = 3f / Mathf.Abs(speed);
+            if (Random.Range(0, 2) == 0)
+            {
+                objToSpawn = trainFlat;
+            }
+            else
+            {
+                objToSpawn = trainCar;
+            }
         }
-        StartCoroutine(WaitAndSpawn(objToSpawn, rowLocation, speed));
+        else if (objToSpawn == trainFlat || objToSpawn == trainCar)
+        {
+            float startingPoint = 12 - 14 * Mathf.Clamp01(speed);
+            tempCar = SpawnTrainComponentAt(objToSpawn, rowLocation, startingPoint, speed);
+            if (Random.Range(0, 5) == 0)
+            {
+                waitTime = 2.2f / Mathf.Abs(speed) * Random.Range(4.1f, 8.2f);
+                objToSpawn = trainEngine;
+            }
+            else
+            {
+                waitTime = 3f / Mathf.Abs(speed);
+                if (Random.Range(0, 2) == 0)
+                {
+                    objToSpawn = trainFlat;
+                }
+                else
+                {
+                    objToSpawn = trainCar;
+                }
+            }
+        }
+        StartCoroutine(WaitAndSpawn(objToSpawn, rowLocation, speed, waitTime));
     }
 
     IEnumerator WaitAndDestroy(GameObject objToDestroy, float waitTime)
@@ -385,9 +411,9 @@ public class S_groundTile : MonoBehaviour
         return tempLog;
     }
 
-    GameObject SpawnTrainEngineAt(float rowLocation, float startingPoint, float speed)
+    GameObject SpawnTrainComponentAt(GameObject trainComponent, float rowLocation, float startingPoint, float speed)
     {
-        GameObject tempEngine = Instantiate(trainEngine, new Vector3(rowLocation, 0.95f, startingPoint), Quaternion.Euler(-90, 180 - 180 * Mathf.Clamp01(speed), 0));      //0.6 = y
+        GameObject tempEngine = Instantiate(trainComponent, new Vector3(rowLocation, 0.95f, startingPoint), Quaternion.Euler(-90, 180 - 180 * Mathf.Clamp01(speed), 0));      //0.6 = y
 
         tempEngine.GetComponent<Rigidbody>().velocity = Vector3.forward * speed;
 
