@@ -1,9 +1,13 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 ﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true,"showVisualEffectGraphs":true,"m_FxEnabled":true},"in2DMode":false,"pivot":{"x":1.0,"y":1.5,"z":5.0},"rotation":{"x":0.42766934633255007,"y":0.20569804310798646,"z":-0.10058175027370453,"w":0.8745844960212708},"size":1.3592852354049683,"orthographic":false}
 =======
 ﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true,"showVisualEffectGraphs":true,"m_FxEnabled":true},"in2DMode":false,"pivot":{"x":0.0,"y":0.0,"z":0.0},"rotation":{"x":0.2597431540489197,"y":0.6355214715003967,"z":-0.24052518606185914,"w":0.6863082647323608},"size":1.5046535730361939,"orthographic":false}
 >>>>>>> Stashed changes
+=======
+﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true,"showVisualEffectGraphs":true,"m_FxEnabled":true},"in2DMode":false,"pivot":{"x":14.688485145568848,"y":-3.0813045501708986,"z":4.7228498458862309},"rotation":{"x":0.3462565243244171,"y":0.5705505609512329,"z":-0.28754952549934389,"w":0.6871083378791809},"size":6.911572456359863,"orthographic":false}
+>>>>>>> parent of c8eb2dd6... Audio Update
 =======
 ﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true,"showVisualEffectGraphs":true,"m_FxEnabled":true},"in2DMode":false,"pivot":{"x":14.688485145568848,"y":-3.0813045501708986,"z":4.7228498458862309},"rotation":{"x":0.3462565243244171,"y":0.5705505609512329,"z":-0.28754952549934389,"w":0.6871083378791809},"size":6.911572456359863,"orthographic":false}
 >>>>>>> parent of c8eb2dd6... Audio Update
