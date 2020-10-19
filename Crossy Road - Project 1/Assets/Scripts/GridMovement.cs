@@ -12,9 +12,10 @@ public class GridMovement : MonoBehaviour
     public Text currentScore;
     public Text currentHighScore;
     [Header("Moving Stuff")]
-    public bool isMoving;
+    bool isMoving;
     public GameObject targetPos;
 
+    bool inWater;
     bool isInvincible;
 
     int minVerticalValue;
@@ -22,15 +23,19 @@ public class GridMovement : MonoBehaviour
 
     GameManager gManager;
 
+    bool onLog;
+
     int[] scoreArray = new int[23];
 
     private void Start()
     {
         Time.timeScale = 1;
 
+        inWater = false;
         isMoving = false;
+        onLog = false;
 
-        minVerticalValue = -1;
+        minVerticalValue = 0;
 
         //setting up highscore prefs
         highScore = PlayerPrefs.GetInt("Highscore");
@@ -92,6 +97,11 @@ public class GridMovement : MonoBehaviour
             {
 
                 transform.position = Vector3.Lerp(transform.position, new Vector3(targetPos.transform.position.x, 1.5f, targetPos.transform.position.z), .35f);
+                if (targetPos.transform.position.z != Mathf.RoundToInt(targetPos.transform.position.z) && !onLog)
+                {
+                    targetPos.transform.position = new Vector3(targetPos.transform.position.x,
+                        targetPos.transform.position.y, Mathf.RoundToInt(targetPos.transform.position.z));
+                }
             }
         }
 
@@ -156,6 +166,12 @@ public class GridMovement : MonoBehaviour
         }
         else
         {
+            if (targetPos.transform.position.x != transform.position.x) //check only if going forward or backward
+            {
+                targetPos.transform.position = new Vector3(targetPos.transform.position.x,
+                targetPos.transform.position.y, Mathf.RoundToInt(targetPos.transform.position.z));
+            }
+
             Collider[] tiles = Physics.OverlapSphere(targetPos.transform.position, .5f);
 
             for (int x = 0; x < tiles.Length; x++)
@@ -186,12 +202,72 @@ public class GridMovement : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Log"))
+        {
+            transform.parent = other.transform; //set the player as a child, so the player moves with the parent
+            targetPos.transform.parent = other.transform;
+            onLog = true;
+        }
+        else if (other.gameObject.CompareTag("Car"))
+        {
+            Debug.Log("Death by traffic");
+            Die();
+        }
+        else if (other.gameObject.CompareTag("Water"))
+        {
+            inWater = true;
+
+            if (transform.root == transform) //if player is not on a log
+            {
+                Invoke("Die", .05f);
+            }
+        }
+        else if (other.gameObject.CompareTag("Exit")) //ending platform
+        {
+            ActivateFlip();
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Log"))
+        {
+            transform.parent = other.transform;
+            targetPos.transform.parent = other.transform; //jump from one log to another, shift direction as needed
+            CancelInvoke();
+            inWater = false;
+            onLog = true;
+        }
+        if (other.gameObject.CompareTag("Water"))
+        {
+            Invoke("Die", .05f); //since player collides with water while on a log, this code must be in Stay
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Log"))
+        {
+            transform.parent = null;
+            targetPos.transform.parent = null;
+            onLog = false;
+        }
+        else if (other.gameObject.CompareTag("Water"))
+        {
+            onLog = false;
+            inWater = false;
+            CancelInvoke();
+        }
+    }
+
     void ResetTarget()
     {
         targetPos.transform.position = new Vector3(targetPos.transform.position.x, .6f, targetPos.transform.position.z); //reset destination position
     }
 
-    public void Die()
+    void Die()
     {
         if (!isInvincible)
         {
@@ -215,7 +291,7 @@ public class GridMovement : MonoBehaviour
         endCube.transform.position = new Vector3((endCube.transform.position.x + 10), endCube.transform.position.y, endCube.transform.position.z);
     }
 
-    public void ActivateFlip()
+    void ActivateFlip()
     {
         Debug.Log("Flipping...");
         gManager.OnFlipButtonClick();

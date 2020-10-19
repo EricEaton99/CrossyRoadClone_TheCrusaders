@@ -1,14 +1,15 @@
 ﻿<Properties StartupConfiguration="{693C19CA-0C90-0D11-5363-B81712EC4858}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GridMovement.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/S_Warning.cs">
     <Files>
-      <File FileName="Assets/Scripts/CharacterUnlocking.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/S_LogsTrainsAndTriggers.cs" Line="24" Column="43" />
-      <File FileName="Assets/Scripts/GridMovement.cs" Line="33" Column="31" />
+      <File FileName="Assets/Scripts/GridMovement.cs" Line="114" Column="19" />
+      <File FileName="Assets/Scripts/CharacterUnlocking.cs" />
+      <File FileName="Assets/Scripts/GameManager.cs" />
+      <File FileName="Assets/Scripts/S_Warning.cs" Line="24" Column="41" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="845004a6-3ea6-4052-af19-e685d28a8da6" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="87253706-5ba8-4a6d-912f-ebc151a86020" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
