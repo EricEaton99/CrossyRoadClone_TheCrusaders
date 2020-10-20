@@ -24,6 +24,10 @@ public class GridMovement : MonoBehaviour
 
     int[] scoreArray = new int[23];
 
+    public GameObject[] highlight; //highlight[0] is front, highlight[1] is back
+
+    float highlightZ;
+
     private void Start()
     {
         Time.timeScale = 1;
@@ -41,6 +45,8 @@ public class GridMovement : MonoBehaviour
 
         PlayerPrefs.GetInt("unlocks");
         Debug.Log("Next character: " + scoreArray[PlayerPrefs.GetInt("unlocks") + 1]);
+
+        highlightZ = transform.position.z;
     }
 
     void Update()
@@ -115,6 +121,37 @@ public class GridMovement : MonoBehaviour
                 }
             }
         }
+
+        for (int x = 0; x < highlight.Length; x++)
+        {
+            Collider[] highlightTiles = Physics.OverlapSphere(highlight[x].transform.position, .4f);
+            bool doRound = false;
+
+            for (int y = 0; y < highlightTiles.Length; y++)
+            {
+                if (highlightTiles[y].name.Contains("Grass")) //if the highlight tile is on grass
+                {
+                    highlightZ = Mathf.RoundToInt(transform.position.z);
+                    doRound = true;
+                }
+                else
+                {
+                    if (!doRound)
+                    {
+                        highlightZ = transform.position.z;
+                    }
+                }
+            }
+
+            if (x == 0) //update the locations
+            {
+                highlight[x].transform.position = new Vector3(transform.position.x + 1, .75f, highlightZ);
+            }
+            else
+            {
+                highlight[x].transform.position = new Vector3(transform.position.x - 1, .75f, highlightZ);
+            }
+        }
     }
 
     void TurnAndMove(int direction)
@@ -156,6 +193,17 @@ public class GridMovement : MonoBehaviour
         }
         else
         {
+            if (targetPos.transform.position.x > transform.position.x && highlight[0].transform.position.x
+                == Mathf.RoundToInt(highlight[0].transform.position.x)) //if going FORWARD and if the front highlight is on grass
+            {
+                targetPos.transform.position = highlight[0].transform.position;
+            }
+            else if (targetPos.transform.position.x < transform.position.x && highlight[1].transform.position.x
+                == Mathf.RoundToInt(highlight[1].transform.position.x)) //if going BACKWARD and if the back highlight is on grass
+            {
+                targetPos.transform.position = highlight[1].transform.position;
+            }
+
             Collider[] tiles = Physics.OverlapSphere(targetPos.transform.position, .5f);
 
             for (int x = 0; x < tiles.Length; x++)
@@ -178,7 +226,19 @@ public class GridMovement : MonoBehaviour
     {
         if (PathCheck()) //if bool "canMove" == true
         {
+            Collider[] logTiles = Physics.OverlapSphere(targetPos.transform.position, .5f);
+
+            for (int x = 0; x < logTiles.Length; x++)
+            {
+                if (logTiles[x].gameObject.CompareTag("Log") && transform.parent != null)
+                {
+                    transform.parent = null;
+                    targetPos.transform.parent = null; //unparent before moving
+                }
+            }
+
             TurnAndMove(direction); //go to destination position
+
         }
         else
         {
