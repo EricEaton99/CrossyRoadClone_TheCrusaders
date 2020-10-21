@@ -133,25 +133,20 @@ public class GridMovement : MonoBehaviour
                 {
                     highlightZ = Mathf.RoundToInt(transform.position.z);
                     doRound = true;
+                    highlight[x].SetActive(true);
                 }
                 else
                 {
                     if (!doRound)
                     {
                         highlightZ = transform.position.z;
+                        highlight[x].SetActive(false);
                     }
                 }
             }
-
-            if (x == 0) //update the locations
-            {
-                highlight[x].transform.position = new Vector3(transform.position.x + 1, .75f, highlightZ);
-            }
-            else
-            {
-                highlight[x].transform.position = new Vector3(transform.position.x - 1, .75f, highlightZ);
-            }
         }
+        highlight[0].transform.position = new Vector3(transform.position.x + 1, .75f, highlightZ);
+        highlight[1].transform.position = new Vector3(transform.position.x - 1, .75f, highlightZ);
     }
 
     void TurnAndMove(int direction)
@@ -194,14 +189,14 @@ public class GridMovement : MonoBehaviour
         else
         {
             if (targetPos.transform.position.x > transform.position.x && highlight[0].transform.position.x
-                == Mathf.RoundToInt(highlight[0].transform.position.x)) //if going FORWARD and if the front highlight is on grass
+                == Mathf.RoundToInt(highlight[0].transform.position.x)) //if going FORWARD and if the front highlight is on grass, scan the front for bushes
             {
                 targetPos.transform.position = highlight[0].transform.position;
             }
             else if (targetPos.transform.position.x < transform.position.x && highlight[1].transform.position.x
-                == Mathf.RoundToInt(highlight[1].transform.position.x)) //if going BACKWARD and if the back highlight is on grass
+                == Mathf.RoundToInt(highlight[1].transform.position.x)) //if going BACKWARD and if the back highlight is on grass, scan the back for bushes
             {
-                targetPos.transform.position = highlight[1].transform.position;
+                targetPos.transform.position = highlight[1].transform.position; //scan the original target for bushes
             }
 
             Collider[] tiles = Physics.OverlapSphere(targetPos.transform.position, .5f);
@@ -226,14 +221,16 @@ public class GridMovement : MonoBehaviour
     {
         if (PathCheck()) //if bool "canMove" == true
         {
-            Collider[] logTiles = Physics.OverlapSphere(targetPos.transform.position, .5f);
+            Collider[] grassTiles = Physics.OverlapSphere(targetPos.transform.position, .4f);
 
-            for (int x = 0; x < logTiles.Length; x++)
+            for (int x = 0; x < grassTiles.Length; x++)
             {
-                if (logTiles[x].gameObject.CompareTag("Log") && transform.parent != null)
+                if (grassTiles[x].gameObject.name.Contains("Grass") && transform.parent != null) //if on a log and going to grass
                 {
                     transform.parent = null;
                     targetPos.transform.parent = null; //unparent before moving
+
+                    Invoke("RoundTargetPosition", .05f); //log will mess up rounded position, so reset it
                 }
             }
 
@@ -251,6 +248,10 @@ public class GridMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Exit")) //ending platform
         {
             ActivateFlip();
+        }
+        else if (other.gameObject.name.Contains("Grass"))
+        {
+            RoundTargetPosition();
         }
 
         if (other.gameObject.CompareTag("Log"))
@@ -360,5 +361,10 @@ public class GridMovement : MonoBehaviour
     void UnlockACharacter(int index)
     {
         PlayerPrefs.SetInt("unlocks", index);
-    }    
+    }
+
+    void RoundTargetPosition()
+    {
+        targetPos.transform.position = new Vector3(targetPos.transform.position.x, .75f, Mathf.RoundToInt(targetPos.transform.position.z));
+    }
 }
