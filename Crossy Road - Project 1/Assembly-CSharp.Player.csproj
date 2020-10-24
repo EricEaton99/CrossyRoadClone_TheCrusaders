@@ -57,13 +57,13 @@
     <Compile Include="Assets\Scripts\S_dayNightCycle.cs" />
     <Compile Include="Assets\dreamlo\dreamloPromoCode.cs" />
     <Compile Include="Assets\Scripts\MainMenuCursor.cs" />
+    <Compile Include="Assets\Scripts\S_CameraAndColor.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\S_groundTile.cs" />
     <Compile Include="Assets\Scripts\GridMovement.cs" />
     <Compile Include="Assets\Scripts\S_ESCMenu.cs" />
     <Compile Include="Assets\Scripts\S_UIAudio.cs" />
     <Compile Include="Assets\Scripts\CharacterUnlocking.cs" />
-    <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\dreamlo\LeaderBoardSample.cs" />
     <Compile Include="Assets\dreamlo\dreamloLeaderBoard.cs" />
   </ItemGroup>

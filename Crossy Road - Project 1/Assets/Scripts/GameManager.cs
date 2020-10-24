@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public InputField name;
     public Text playerNameText;
     public GameObject leaderboardPanel;
+    public GameObject cSelect; //Character select
     
 
 
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour
     }
 
     //Main Menu stuff
+    //Controlling the player prefs and things to open and close main menu UI elements.
     public void OnClickStart()
     {
         PlayerPrefs.Save();
@@ -61,6 +63,14 @@ public class GameManager : MonoBehaviour
     {
         helpPanel.SetActive(false);
         print("The Help (close) button was clicked");
+    }
+    public void OnCSelectOpen()
+    {
+        cSelect.SetActive(true);
+    }
+    public void OnCSelectClose()
+    {
+        cSelect.SetActive(false);
     }
     public void OnGlobalOpen()
     {
