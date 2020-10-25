@@ -24,4 +24,13 @@ public class CharacterUnlocking : MonoBehaviour
             characterBools[b] = true; //5th character unlocked -> set "unlocks" as 5, then make every characterBool up to and including 5, true
         }
     }
+
+    public void cSelectRight()
+    {
+
+    }
+    public void cSelectLeft()
+    {
+
+    }
 }
