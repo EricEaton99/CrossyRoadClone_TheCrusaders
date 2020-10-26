@@ -17,11 +17,18 @@ public class S_ESCMenu : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown("escape"))
+        {
             toggle = !toggle;
+            if (toggle)
+            {
+                OnEPress();
+            }
+            else
+            {
+                OnEQuit();
+            }
 
-        if (toggle)
-            OnEPress();
-            
+        }   
     }
 
     public void OnEPress()
@@ -42,7 +49,9 @@ public class S_ESCMenu : MonoBehaviour
 
     public void OnEResume() //I can't get this to work and I don't know why. Im sure im missing something super simple.
     {
-        OnEPress();
+        toggle = !toggle;
+        OnEQuit();
+        //OnEPress();
     }
 
     public void OnClickMainMenu()

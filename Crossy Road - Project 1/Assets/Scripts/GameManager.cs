@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
     public void OnClickHelp()
     {
         helpPanel.SetActive(true);
+        leaderboardPanel.SetActive(false);
         print("The Help button was clicked");
     }
     public void OnHelpClose()
@@ -75,7 +76,7 @@ public class GameManager : MonoBehaviour
     public void OnGlobalOpen()
     {
         leaderboardPanel.SetActive(true);
-
+        helpPanel.SetActive(false);
     }
     public void OnGlobalClose()
     {

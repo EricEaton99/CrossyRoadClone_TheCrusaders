@@ -16,7 +16,7 @@ public class CharacterUnlocking : MonoBehaviour
         {
             characterBools[a] = false;
         }
-
+        
         unlockedChars = PlayerPrefs.GetInt("unlocks");
 
         for (int b = 0; b <= unlockedChars; b++)
