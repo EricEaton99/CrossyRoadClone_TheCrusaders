@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public Text highscore;
     public InputField name;
     public Text playerNameText;
+    public GameObject highscoreTitle;
     public GameObject leaderboardPanel;
     public GameObject cSelect; //Character select
     
@@ -35,6 +36,18 @@ public class GameManager : MonoBehaviour
         {
             OnClickClearPrefs();
         }
+
+        if(PlayerPrefs.GetInt("Highscore") == 0)
+        {
+            highscore.gameObject.SetActive(false);
+            highscoreTitle.SetActive(false);
+        }
+        else
+        {
+            highscore.gameObject.SetActive(true);
+            highscoreTitle.SetActive(true);
+        }
+
     }
 
     public void OnFlipButtonClick()
