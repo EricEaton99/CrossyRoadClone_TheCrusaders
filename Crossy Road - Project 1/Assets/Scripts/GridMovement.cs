@@ -51,19 +51,6 @@ public class GridMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I)) //developer key
-        {
-            if (!isInvincible)
-            {
-                isInvincible = true;
-            }
-            else
-            {
-                isInvincible = false;
-            }
-            Debug.Log("isInvincible = " + isInvincible);
-        }
-
         if (!isMoving)
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -130,7 +117,7 @@ public class GridMovement : MonoBehaviour
 
             for (int y = 0; y < highlightTiles.Length; y++)
             {
-                if (highlightTiles[y].name.Contains("Grass")) //if the highlight tile is on grass
+                if (highlightTiles[y].name.Contains("Grass") || highlightTiles[y].name.Contains("Road")) //if the highlight tile is on grass
                 {
                     highlightZ = Mathf.RoundToInt(transform.position.z);
                     doRound = true;
