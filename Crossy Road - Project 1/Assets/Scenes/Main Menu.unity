@@ -3749,7 +3749,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Filler
+  m_Text: Loading...
 --- !u!222 &1568288111
 CanvasRenderer:
   m_ObjectHideFlags: 0

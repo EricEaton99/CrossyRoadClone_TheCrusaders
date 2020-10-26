@@ -28,6 +28,8 @@ public class GridMovement : MonoBehaviour
 
     float highlightZ;
 
+    bool onLog;
+
     private void Start()
     {
         Time.timeScale = 1;
@@ -110,31 +112,71 @@ public class GridMovement : MonoBehaviour
             }
         }
 
-        for (int x = 0; x < highlight.Length; x++)
-        {
-            Collider[] highlightTiles = Physics.OverlapSphere(highlight[x].transform.position, .4f);
-            bool doRound = false;
+        //for (int x = 0; x < highlight.Length; x++)
+        //{
+        //    Collider[] highlightTiles = Physics.OverlapSphere(highlight[x].transform.position, .4f);
 
-            for (int y = 0; y < highlightTiles.Length; y++)
+        //    //print(highlightTiles.Length);
+
+        //    bool tileIsEnterable = false;
+
+        //    for (int y = 0; y < highlightTiles.Length; y++)
+        //    {
+
+        //        if ( (highlightTiles[y].name.Contains("Grass") || highlightTiles[y].name.Contains("Road") || highlightTiles[y].name.Contains("Tracks") ) && transform.parent) //if the highlight tile is on grass
+        //        {
+        //            highlightZ = Mathf.RoundToInt(transform.position.z);
+        //            //doRound = true;
+        //            highlight[x].SetActive(true);
+        //            //tileIsEnterable = true;                                                                       //Highlights turned off
+        //            break;
+        //        }
+        //    }
+
+
+        //    if(!tileIsEnterable)
+        //    {
+        //        highlightZ = transform.position.z;
+        //        highlight[x].SetActive(false);
+        //    }
+        //}
+
+        if (transform.parent)
+        {
+            switch (SetHighlights())
             {
-                if (highlightTiles[y].name.Contains("Grass") || highlightTiles[y].name.Contains("Road")) //if the highlight tile is on grass
-                {
-                    highlightZ = Mathf.RoundToInt(transform.position.z);
-                    doRound = true;
-                    highlight[x].SetActive(true);
-                }
-                else
-                {
-                    if (!doRound)
-                    {
-                        highlightZ = transform.position.z;
-                        highlight[x].SetActive(false);
-                    }
-                }
+                case 0:
+                    highlight[0].SetActive(true);
+                    highlight[1].SetActive(true);
+                    break;
+                case 1:
+                    highlight[0].SetActive(false);
+                    highlight[1].SetActive(true);
+                    break;
+                case 2:
+                    highlight[0].SetActive(true);
+                    highlight[1].SetActive(false);
+                    break;
+                case 3:
+                    highlight[0].SetActive(false);
+                    highlight[1].SetActive(false);
+                    break;
+                default:
+                    print("out of range ");
+                    break;
             }
+            highlight[0].transform.position = new Vector3(transform.position.x + 1, .75f, Mathf.RoundToInt(transform.position.z));
+            highlight[1].transform.position = new Vector3(transform.position.x - 1, .75f, Mathf.RoundToInt(transform.position.z));
         }
-        highlight[0].transform.position = new Vector3(transform.position.x + 1, .75f, highlightZ);
-        highlight[1].transform.position = new Vector3(transform.position.x - 1, .75f, highlightZ);
+        else
+        {
+            highlight[0].SetActive(false);
+            highlight[1].SetActive(false);
+        }
+
+        
+
+        
     }
 
     void TurnAndMove(int direction)
@@ -161,11 +203,12 @@ public class GridMovement : MonoBehaviour
         }
     }
 
-    bool PathCheck() //if going left, what's the tile to the left?
+    bool PathCheck(int direction) //if going left, what's the tile to the left?
     {
         bool canMove = false;
         bool bushIsThere = false;
 
+        //Player is moving in bounds of board
         if (targetPos.transform.position.z >= 10 || targetPos.transform.position.z <= -1) //don't go outside the boundaries
         {
             Debug.Log("Error... Horizontal game board is not there...");
@@ -174,53 +217,122 @@ public class GridMovement : MonoBehaviour
         {
             Debug.Log("Error... Vertical game board is not there...");
         }
+        //Player is not moving into bush
         else
         {
-            if (targetPos.transform.position.x > transform.position.x && highlight[0].transform.position.x
-                == Mathf.RoundToInt(highlight[0].transform.position.x)) //if going FORWARD and if the front highlight is on grass, scan the front for bushes
-            {
-                targetPos.transform.position = highlight[0].transform.position;
-            }
-            else if (targetPos.transform.position.x < transform.position.x && highlight[1].transform.position.x
-                == Mathf.RoundToInt(highlight[1].transform.position.x)) //if going BACKWARD and if the back highlight is on grass, scan the back for bushes
-            {
-                targetPos.transform.position = highlight[1].transform.position; //scan the original target for bushes
-            }
+            SetTarget(direction);        //Update future position}
 
-            Collider[] tiles = Physics.OverlapSphere(targetPos.transform.position, .5f);
+            Collider[] tiles = Physics.OverlapSphere(targetPos.transform.position, .4f);
+            print("sphere 0.4f at: " + targetPos.transform.position + " found: " + tiles.Length + " objects");
 
             for (int x = 0; x < tiles.Length; x++)
             {
+                print("loop pass: " + x);
                 if (tiles[x].gameObject.CompareTag("Bush"))
                 {
+                    print("found bush");
                     bushIsThere = true; //move the player unless there's a bush there
                 }
             }
 
             if (!bushIsThere)
             {
+                print("can move");
                 canMove = true;
+            }
+            else
+            {
+                print("cannot move");
+
             }
         }
         return canMove;
     }
 
+    void SetTarget(int direction)        //Sets movement destination
+    {
+        bool isForward = false;
+        //bool isLog = false;
+        bool toLog = false;
+        Collider[] moveToObjList;
+        Collider logToEnter = null;
+
+        if (direction == 0)
+        {
+            targetPos.transform.position = new Vector3(transform.position.x, 0.75f, transform.position.z + 1);      //set targetPos no snap left
+            return;
+        }
+        else if (direction == 2)
+        {
+            //targetPos.transform.position = transform.position + Vector3.back;
+            targetPos.transform.position = new Vector3(transform.position.x, 0.75f, transform.position.z - 1);      //set targetPos no snap right
+            return;
+        }
+        else if (direction == 1)          //if going FORWARD
+        {
+            isForward = true;
+        }
+        if (isForward)
+        {
+            moveToObjList = Physics.OverlapSphere(transform.position + Vector3.right, .4f);
+        }
+        else
+        {
+            moveToObjList = Physics.OverlapSphere(transform.position + Vector3.left, .4f);
+            
+        }
+        for (int i = 0; i < moveToObjList.Length; i++)
+        {
+            if (moveToObjList[i].transform.CompareTag("Log"))       // || moveToObjList[i].transform.CompareTag("Water")
+            {
+                toLog = true;
+                logToEnter = moveToObjList[i];
+            }
+        }
+
+        onLog = toLog;
+        if (toLog)
+        {
+            transform.parent = logToEnter.gameObject.transform;        //set the player as a child, so the player moves with the parent
+            if (isForward)
+            {
+                targetPos.transform.position = transform.position + Vector3.right;      //set targetPos no snap forward
+            }
+            else
+            {
+                targetPos.transform.position = transform.position + Vector3.left;      //set targetPos no snap back
+            }
+        }
+        else
+        {
+            transform.parent = null;
+            if (isForward)
+            {
+                targetPos.transform.position = new Vector3(transform.position.x + 1, 0.75f, Mathf.RoundToInt(transform.position.z));      //set targetPos with snap forward
+            }
+            else
+            {
+                targetPos.transform.position = new Vector3(transform.position.x - 1, 0.75f, Mathf.RoundToInt(transform.position.z));      //set targetPos with snap back
+            }
+        }
+    }
+
     void CheckTileAndStartMoving(int direction)
     {
-        if (PathCheck()) //if bool "canMove" == true
+        if (PathCheck(direction)) //if bool "canMove" == true
         {
-            Collider[] grassTiles = Physics.OverlapSphere(targetPos.transform.position, .4f);
+            //Collider[] grassTiles = Physics.OverlapSphere(targetPos.transform.position, .4f);
 
-            for (int x = 0; x < grassTiles.Length; x++)
-            {
-                if (grassTiles[x].gameObject.name.Contains("Grass") && transform.parent != null) //if on a log and going to grass
-                {
-                    transform.parent = null;
-                    targetPos.transform.parent = null; //unparent before moving
+            //for (int x = 0; x < grassTiles.Length; x++)
+            //{
+            //    if ((grassTiles[x].name.Contains("Grass") || grassTiles[x].name.Contains("Road")) && transform.parent != null) //if on a log and going to grass
+            //    {
+            //        transform.parent = null;
+            //        targetPos.transform.parent = null; //unparent before moving
 
-                    Invoke("RoundTargetPosition", .05f); //log will mess up rounded position, so reset it
-                }
-            }
+            //        //Invoke("RoundTargetPosition", .05f); //log will mess up rounded position, so reset it
+            //    }
+            //}
 
             TurnAndMove(direction); //go to destination position
 
@@ -228,6 +340,47 @@ public class GridMovement : MonoBehaviour
         else
         {
             ResetTarget();
+        }
+    }
+
+    int SetHighlights()        //Sets movement destination
+    {
+        bool isForward = false;
+        bool toLogForward = false;
+        bool toLogBackward = false;
+        Collider logToEnter = null;
+        
+        Collider[] forwardObjList = Physics.OverlapSphere(transform.position + Vector3.right, .4f);
+        Collider[] backwardObjList = Physics.OverlapSphere(transform.position + Vector3.left, .4f);
+
+        for (int i = 0; i < forwardObjList.Length; i++)
+        {
+            if (forwardObjList[i].transform.CompareTag("Log") || forwardObjList[i].transform.CompareTag("Water") || forwardObjList[i].transform.CompareTag("Bush"))       // || moveToObjList[i].transform.CompareTag("Water")
+            {
+                toLogForward = true;
+            }
+        }
+        for (int i = 0; i < backwardObjList.Length; i++)
+        {
+            if (backwardObjList[i].transform.CompareTag("Log") || backwardObjList[i].transform.CompareTag("Water") || backwardObjList[i].transform.CompareTag("Bush"))       // || moveToObjList[i].transform.CompareTag("Water")
+            {
+                toLogBackward = true;
+            }
+        }
+
+        if(!toLogForward && !toLogBackward)
+        {
+            return 0;
+        }else if (toLogForward && !toLogBackward)
+        {
+            return 1;
+        }
+        else if (!toLogForward && toLogBackward)
+        {
+            return 2;
+        }
+        else{
+            return 3;
         }
     }
 
