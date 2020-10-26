@@ -1,14 +1,16 @@
 ﻿<Properties StartupConfiguration="{693C19CA-0C90-0D11-5363-B81712EC4858}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GridMovement.cs">
     <Files>
-      <File FileName="Assets/Scripts/GridMovement.cs" Line="113" Column="52" />
-      <File FileName="Assets/Scripts/S_ScoreTransfer.cs" />
-      <File FileName="Assets/Scripts/S_CameraAndColor.cs" Line="16" Column="123" />
+      <File FileName="Assets/Scripts/GridMovement.cs" Line="101" Column="108" />
+      <File FileName="Assets/Scripts/S_ScoreTransfer.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/S_CameraAndColor.cs" Line="24" Column="48" />
+      <File FileName="Assets/Scripts/CharacterUnlocking.cs" Line="21" Column="39" />
+      <File FileName="Assets/Scripts/GameManager.cs" Line="36" Column="33" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="8d7753a2-89fc-4458-a8eb-af6fab411adb" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="506963b6-6c3e-4d92-8eb2-55fe496002f6" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

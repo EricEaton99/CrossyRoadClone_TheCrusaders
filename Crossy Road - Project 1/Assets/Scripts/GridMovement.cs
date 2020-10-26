@@ -97,7 +97,8 @@ public class GridMovement : MonoBehaviour
             else //move until the object is close to the point, then snap it to the point
             {
 
-                transform.position = Vector3.Lerp(transform.position, new Vector3(targetPos.transform.position.x, 1.5f, targetPos.transform.position.z), .35f);
+                transform.position = Vector3.Lerp(transform.position,
+                    new Vector3(targetPos.transform.position.x, 1.5f, targetPos.transform.position.z), .35f);
             }
         }
 

@@ -29,6 +29,14 @@ public class GameManager : MonoBehaviour
         groundTile2.GetComponent<S_groundTile>().Shuffle();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Z)) //developer key
+        {
+            OnClickClearPrefs();
+        }
+    }
+
     public void OnFlipButtonClick()
     {
         frontTile.transform.position = Vector3.right * (frontTile.transform.position.x + 20);
