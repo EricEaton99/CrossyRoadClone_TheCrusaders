@@ -22,7 +22,7 @@ public class GridMovement : MonoBehaviour
 
     GameManager gManager;
 
-    int[] scoreArray = new int[23];
+    int[] scoreArray = new int[12];
 
     public GameObject[] highlight; //highlight[0] is front, highlight[1] is back
 
@@ -342,21 +342,21 @@ public class GridMovement : MonoBehaviour
         int unlockScore = 10;
         for (int x = 1; x < scoreArray.Length; x++)
         {
-            if (x < 10) //0, 20, 30, 40... (100)
+            if (x < 4) //0, 20, 30, (40)
             {
                 unlockScore += 10;
             }
-            else if (x < 20) //115, 130, 145... (250)
+            else if (x < 8) //55, 70, 85, (100)
             {
                 unlockScore += 15;
             }
-            else //300, 350, (400)
+            else //125, 150, 175, (200)
             {
-                unlockScore += 50;
+                unlockScore += 25;
             }
             scoreArray[x] = unlockScore;
         }
-        Debug.Log(scoreArray[22]);
+        Debug.Log(scoreArray[11]);
     }
 
     void UnlockACharacter(int index)

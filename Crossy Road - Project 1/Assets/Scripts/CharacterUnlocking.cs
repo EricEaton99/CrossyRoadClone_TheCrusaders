@@ -15,7 +15,7 @@ public class CharacterUnlocking : MonoBehaviour
 
     void Start()
     {
-        characterBools = new bool[23];
+        characterBools = new bool[12];
         for (int a = 0; a < characterObjects.Length; a++) //lock everything
         {
             characterBools[a] = false;
@@ -35,7 +35,7 @@ public class CharacterUnlocking : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z)) //developer key
+        if (Input.GetKeyDown(KeyCode.Tab)) //developer key
         {
             selectIndex = 0;
             UpdateCharacterSelect();
@@ -57,12 +57,12 @@ public class CharacterUnlocking : MonoBehaviour
     public void cSelectLeft()
     {
         selectIndex--;
+
+        if (selectIndex < 0)
         {
-            if (selectIndex < characterSelect.Length)
-            {
-                selectIndex = characterSelect.Length - 1;
-            }
+            selectIndex = characterSelect.Length;
         }
+
         UpdateCharacterSelect();
     }
 
@@ -70,7 +70,7 @@ public class CharacterUnlocking : MonoBehaviour
     {
         GameObject tempCharacter;
 
-        for (int x = 0; x < 23; x++)
+        for (int x = 0; x < 12; x++)
         {
             tempCharacter = characterHolder.transform.GetChild(x).gameObject;
             tempCharacter.SetActive(false);

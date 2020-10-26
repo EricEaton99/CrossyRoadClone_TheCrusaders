@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z)) //developer key
+        if (Input.GetKeyDown(KeyCode.Tab)) //developer key
         {
             OnClickClearPrefs();
         }
